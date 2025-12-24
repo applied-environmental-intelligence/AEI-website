@@ -82,6 +82,10 @@ right, up, forward = lookat_basis(cam_pos, target, up_world)
 pts2 = project(endpoints_world, right, up, forward)
 width_screen = abs(pts2[1, 0] - pts2[0, 0])
 scale = desired_span_px / max(width_screen, 1e-6)
+# Nudge cable downward so the bottom black buffer is only ~one cable height
+cable_half_px = r_wire * scale
+buffer_px = 2 * cable_half_px  # one full cable height as buffer
+cy = H2 - (buffer_px + cable_half_px)
 
 
 def to_pixels(pts2):
@@ -114,7 +118,7 @@ front_outer_local = np.stack([r_cable * np.cos(phis), r_cable * np.sin(phis), np
 front_inner_local = np.stack([r_inner * np.cos(phis), r_inner * np.sin(phis), np.full_like(phis, +L / 2)], axis=1)
 
 def draw_polyline(draw, pts, width):
-    draw.line([tuple(p) for p in pts], fill=255, width=width, joint="curve")
+    draw.line([tuple(p) for p in pts], fill=ink, width=width, joint="curve")
 
 
 # Camera basis fixed on cable midpoint
@@ -124,6 +128,8 @@ right, up, forward = lookat_basis(cam_pos, target, up_world)
 line_w = int(2.2 * S)
 cable_w = int(3.2 * S)
 inner_w = int(2.2 * S)
+ink = 240  # light gray (#f0f0f0)
+bg_level = 17  # dark gray (#111111)
 
 frames = []
 durations = []
@@ -138,7 +144,7 @@ for i in range(n_frames):
 
     R = rot_y(theta)
 
-    img = Image.new("L", (W2, H2), 0)
+    img = Image.new("L", (W2, H2), bg_level)
     draw = ImageDraw.Draw(img)
 
     # Dense rings first
@@ -185,7 +191,7 @@ for i in range(n_frames):
             )
             Pw_rect = (R @ rect_local.T).T + np.array([0.0, 0.0, z_center])
             pts2_rect = to_pixels(project(Pw_rect, right, up, forward))
-            draw.polygon([tuple(p) for p in pts2_rect], fill=255)
+            draw.polygon([tuple(p) for p in pts2_rect], fill=ink)
 
     # Anti-alias
     img = img.filter(ImageFilter.GaussianBlur(radius=0.55))

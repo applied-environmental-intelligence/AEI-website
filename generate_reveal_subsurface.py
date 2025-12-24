@@ -4,6 +4,8 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFilter
 
+BG_RGBA = (17, 17, 17, 255)  # #111111 solid background
+
 
 def main():
     src = Path("subsurface.png")
@@ -48,12 +50,15 @@ def main():
         # Feather mask edges for a soft fade
         mask = mask.filter(ImageFilter.GaussianBlur(radius=max(1, int(w * 0.01))))
 
-        # Apply mask over a black background
-        frame = Image.new("RGBA", (w, h), (0, 0, 0, 255))
+        # Apply mask over a dark background
+        frame = Image.new("RGBA", (w, h), BG_RGBA)
         revealed = img.copy()
         revealed.putalpha(mask)
         frame = Image.alpha_composite(frame, revealed)
-        frames.append(frame.convert("P", palette=Image.Palette.ADAPTIVE, colors=64))
+        # Keep palette richer so background stays true to #111111
+        frames.append(
+            frame.convert("RGB").quantize(colors=256, method=Image.MEDIANCUT)
+        )
 
     frames[0].save(
         out_gif,

@@ -502,6 +502,91 @@
       button[type="submit"]:hover {
         background-color: #ccc;
       }
+
+      /* Mobile & Tablet Responsive Styles */
+      /* Only apply on small screens - preserve desktop design */
+      @media (max-width: 768px) {
+        /* Header: stack on small screens */
+        .floating-header {
+          padding: 10px 20px;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+
+        .floating-header__brand {
+          font-size: 40px;
+        }
+
+        .floating-header__brand .brand-subtitle {
+          font-size: 16px;
+        }
+
+        .floating-header__nav {
+          font-size: 16px;
+          gap: 16px;
+        }
+
+        /* Hero: smaller headlines to prevent overlap on mobile */
+        .headline--left,
+        .headline--right {
+          font-size: clamp(24px, 6vw, 42px);
+        }
+
+        .headline--left {
+          left: 6%;
+          right: auto;
+        }
+
+        .headline--right {
+          left: auto;
+          right: 6%;
+        }
+
+        .bottom {
+          font-size: clamp(28px, 7vw, 48px);
+        }
+
+        /* Team: single column on mobile */
+        .team-grid {
+          grid-template-columns: 1fr;
+          gap: 32px;
+          padding: 0 16px;
+        }
+
+        /* Contact: prevent iOS zoom */
+        input[type="text"],
+        input[type="email"],
+        textarea {
+          font-size: 16px;
+        }
+      }
+
+      /* Very small phones only */
+      @media (max-width: 480px) {
+        .floating-header__brand {
+          font-size: 32px;
+        }
+
+        .floating-header__brand .brand-subtitle {
+          font-size: 14px;
+        }
+
+        .floating-header__nav {
+          font-size: 14px;
+          gap: 12px;
+        }
+
+        /* Even smaller headlines for tiny screens */
+        .headline--left,
+        .headline--right {
+          font-size: clamp(20px, 5.5vw, 36px);
+        }
+
+        .bottom {
+          font-size: clamp(24px, 6.5vw, 40px);
+        }
+      }
     </style>
   </head>
 
@@ -527,7 +612,7 @@
         </div>
 
         <div class="headline headline--right">
-          <span class="blue">Wire theft</span>
+          <span class="blue">Event</span>
           <span class="black">detection.</span>
         </div>
 

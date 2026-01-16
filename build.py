@@ -12,7 +12,8 @@ This script:
 Usage:
     python build.py
 """
-import shutil import subprocess
+import shutil
+import subprocess
 import sys
 from pathlib import Path
 

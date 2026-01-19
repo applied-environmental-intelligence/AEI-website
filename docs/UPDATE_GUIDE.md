@@ -106,6 +106,237 @@ Add this CSS to make it responsive:
 
 Replace `VIDEO_ID_HERE` with your YouTube video ID (from the URL after `v=`).
 
+### Embed LinkedIn Posts
+
+LinkedIn provides embed codes for posts. For **automatic latest posts**, use the Company Profile widget. For **specific posts**, use individual embeds.
+
+#### Option 1: Automatic - Company Profile Widget (Recommended for Latest Posts)
+
+This automatically displays your latest company posts without manual updates.
+
+**Add to `src/index.html`:**
+
+```html
+<!-- LinkedIn Company Feed - Shows Latest Posts Automatically -->
+<section id="news" class="section-dark">
+  <h2>Latest Updates</h2>
+  <p class="team-intro">Follow our latest research and developments</p>
+  
+  <div class="linkedin-company-feed">
+    <script src="https://platform.linkedin.com/in.js" type="text/javascript">
+      lang: en_US
+    </script>
+    
+    <script type="IN/CompanyProfile" 
+            data-id="YOUR_COMPANY_ID" 
+            data-format="inline"
+            data-related="false">
+    </script>
+  </div>
+</section>
+```
+
+**How to find your Company ID:**
+1. Go to your LinkedIn company page
+2. Look at the URL: `linkedin.com/company/YOUR-COMPANY-NAME/`
+3. The company ID is the number in the page source, or use: `linkedin.com/company/YOUR-COMPANY-NAME/about/`
+4. Or use this format: If your URL is `linkedin.com/company/applied-environmental-intelligence/`, the ID might be in the page source
+
+**Add CSS for styling:**
+
+```css
+.linkedin-company-feed {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.IN-widget {
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .linkedin-company-feed {
+    padding: 0 16px;
+  }
+}
+```
+
+**Pros:**
+- ✅ Automatically shows latest posts
+- ✅ No manual updates needed
+- ✅ Official LinkedIn widget
+
+**Cons:**
+- ⚠️ Less control over styling
+- ⚠️ Shows multiple posts (not single post)
+
+#### Option 2: Manual - Individual Post Embeds (For Specific Posts)
+
+Use this when you want to feature a specific post.
+
+**Step 1: Get the LinkedIn Embed Code**
+
+1. Go to the LinkedIn post you want to embed
+2. Click the three dots (•••) in the top right of the post
+3. Select "Embed" from the menu
+4. Copy the embed code provided
+
+**Step 2: Add to Your Website**
+
+Add the embed code in `src/index.html` where you want the post to appear:
+
+```html
+<!-- LinkedIn Post Embed -->
+<div class="linkedin-embed-container">
+  <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:1234567890"
+          height="600" 
+          width="100%" 
+          frameborder="0" 
+          allowfullscreen="" 
+          title="Embedded LinkedIn post">
+  </iframe>
+</div>
+```
+
+**Step 3: Add Responsive CSS**
+
+Add this CSS to make LinkedIn embeds responsive:
+
+```css
+.linkedin-embed-container {
+  max-width: 504px; /* LinkedIn's default post width */
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.linkedin-embed-container iframe {
+  width: 100%;
+  min-height: 600px;
+  border: none;
+  border-radius: 8px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .linkedin-embed-container {
+    max-width: 100%;
+    margin: 16px;
+  }
+}
+```
+
+**Step 4: Add LinkedIn Script** (Required for embeds to work)
+
+Add this script before the closing `</body>` tag in `src/index.html`:
+
+```html
+<script src="https://platform.linkedin.com/in.js" type="text/javascript">
+  lang: en_US
+</script>
+```
+
+**Example: Create a LinkedIn Feed Section**
+
+```html
+<!-- Add this section in src/index.html -->
+<section id="news" class="section-dark">
+  <h2>Latest Updates</h2>
+  <p class="team-intro">Follow our latest research and developments</p>
+  
+  <div class="linkedin-posts">
+    <!-- Post 1 -->
+    <div class="linkedin-embed-container">
+      <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:YOUR_POST_ID"
+              height="600" 
+              width="100%" 
+              frameborder="0" 
+              allowfullscreen="" 
+              title="LinkedIn post">
+      </iframe>
+    </div>
+    
+    <!-- Post 2 -->
+    <div class="linkedin-embed-container">
+      <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:YOUR_POST_ID"
+              height="600" 
+              width="100%" 
+              frameborder="0" 
+              allowfullscreen="" 
+              title="LinkedIn post">
+      </iframe>
+    </div>
+  </div>
+</section>
+```
+
+**CSS for Multiple Posts:**
+
+```css
+.linkedin-posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 504px));
+  gap: 32px;
+  justify-content: center;
+  max-width: 1160px;
+  margin: 40px auto 0;
+  padding: 0 20px;
+}
+```
+
+**Alternative: LinkedIn Company Page Plugin**
+
+For your company page feed, use:
+
+```html
+<script src="https://platform.linkedin.com/in.js" type="text/javascript">
+  lang: en_US
+</script>
+
+<script type="IN/CompanyProfile" 
+        data-id="YOUR_COMPANY_ID" 
+        data-format="inline" 
+        data-related="false">
+</script>
+```
+
+Replace `YOUR_COMPANY_ID` with your LinkedIn company page ID.
+
+#### Option 3: Semi-Automatic - Using LinkedIn Feed API (Advanced)
+
+For fully automated latest posts with custom styling, you'd need a backend service:
+
+```javascript
+// Example using a serverless function (requires LinkedIn API access)
+// This would fetch your latest posts and inject them into the page
+// Note: Requires LinkedIn API credentials and OAuth setup
+
+async function fetchLatestLinkedInPosts() {
+  // This requires backend implementation
+  // LinkedIn API: https://docs.microsoft.com/en-us/linkedin/
+  const response = await fetch('/api/linkedin-posts'); // Your backend endpoint
+  const posts = await response.json();
+  
+  const container = document.getElementById('linkedin-posts');
+  posts.forEach(post => {
+    // Create embed for each post
+    const embed = document.createElement('iframe');
+    embed.src = post.embedUrl;
+    container.appendChild(embed);
+  });
+}
+```
+
+**Requirements for API approach:**
+- LinkedIn Developer Account
+- OAuth 2.0 authentication
+- Backend server or serverless functions
+- Regular token refresh
+
+**Recommendation:** Use Option 1 (Company Profile Widget) for automatic updates without backend complexity.
+
 ### Add Static Images
 
 1. Create an images directory in src (if it doesn't exist):

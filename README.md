@@ -224,7 +224,7 @@ No path changes are needed when deploying - the build process handles everything
 
 Your site will be available at:
 ```
-https://marinedenolle.github.io/AEI-website/
+https://applied-environment-intelligence.github.io/AEI-website/
 ```
 
 ### Manual Deployment
@@ -242,8 +242,26 @@ You can also trigger a deployment manually:
 - **Add new pages**: Create new HTML files in `src/` and update navigation
 - **Regenerate animations**: Modify scripts in `scripts/` and rebuild
 - **Add images**: Place in `src/assets/` and reference with relative paths
+- **Embed LinkedIn posts**: Use Company Profile widget for automatic latest posts (see guide below)
+- **Embed YouTube videos**: Use iframe embed codes with responsive containers
 
-For detailed instructions, see [docs/UPDATE_GUIDE.md](docs/UPDATE_GUIDE.md).
+For detailed instructions including **automatic LinkedIn post embedding**, see [docs/UPDATE_GUIDE.md](docs/UPDATE_GUIDE.md).
+
+### Quick: Embed LinkedIn Posts (Automatic)
+
+**For automatic latest posts from your company page:**
+
+1. Add to `src/index.html`:
+   ```html
+   <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+   <script type="IN/CompanyProfile" data-id="YOUR_COMPANY_ID" data-format="inline"></script>
+   ```
+2. Replace `YOUR_COMPANY_ID` with your LinkedIn company page ID
+3. Rebuild: `python build.py`
+
+**For specific individual posts:** Get embed code from LinkedIn post → ••• → "Embed"
+
+See [docs/UPDATE_GUIDE.md](docs/UPDATE_GUIDE.md#embed-linkedin-posts) for all options and styling.
 
 ## 🤝 Contributing
 
@@ -279,7 +297,12 @@ Add the source image to `src/assets/source/subsurface.png`. See [src/assets/sour
 
 ## 📄 License
 
-Copyright © 2025 Applied Environmental Intelligence. All rights reserved.
+This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)**.
+
+**Academic Use:** ✅ Freely permitted for research, education, and non-profit purposes  
+**Commercial Use:** ⚠️ Requires explicit written permission from Applied Environmental Intelligence
+
+See [LICENSE](LICENSE) for full terms.
 
 ## 📧 Contact
 

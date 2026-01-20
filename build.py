@@ -19,7 +19,7 @@ from pathlib import Path
 
 # Project paths
 PROJECT_ROOT = Path(__file__).parent.resolve()
-SRC_DIR = PROJECT_ROOT / "src"
+SRC_DIR = PROJECT_ROOT / "docs"
 DIST_DIR = PROJECT_ROOT / "dist"
 SCRIPTS_DIR = PROJECT_ROOT / "scripts"
 ANIMATIONS_DIR = DIST_DIR / "animations"
@@ -45,8 +45,8 @@ def clean_dist():
 
 
 def copy_static_assets():
-    """Copy all static files from src/ to dist/."""
-    print("\n📦 Copying static assets from src/ to dist/...")
+    """Copy all static files from docs/ to dist/."""
+    print("\n📦 Copying static assets from docs/ to dist/...")
     
     # Copy index.html
     src_html = SRC_DIR / "index.html"

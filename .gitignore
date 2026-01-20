@@ -25,4 +25,4 @@ Thumbs.db
 *~
 
 # Generated assets (build artifacts)
-src/assets/generated/
+docs/assets/generated/

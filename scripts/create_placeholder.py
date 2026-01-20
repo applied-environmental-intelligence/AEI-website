@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageFont
 def create_placeholder():
     """Create a placeholder subsurface image."""
     # Output path
-    output = Path("src/assets/source/subsurface.png")
+    output = Path("docs/assets/source/subsurface.png")
     output.parent.mkdir(parents=True, exist_ok=True)
     
     # Create a nice gradient image

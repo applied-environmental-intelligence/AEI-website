@@ -21,12 +21,12 @@ This file may be:
 2. **Place it in this directory**:
    ```bash
    # Copy your image to this location
-   cp /path/to/your/subsurface.png src/assets/source/subsurface.png
+   cp /path/to/your/subsurface.png docs/assets/source/subsurface.png
    ```
 
 3. **Verify it's in place**:
    ```bash
-   ls -lh src/assets/source/subsurface.png
+   ls -lh docs/assets/source/subsurface.png
    ```
 
 4. **Build the site** to generate the reveal animation:
@@ -54,7 +54,7 @@ If you need a placeholder for testing, you can create a simple test image:
 
 ```bash
 # Using ImageMagick (if installed)
-convert -size 800x600 gradient:blue-cyan src/assets/source/subsurface.png
+convert -size 800x600 gradient:blue-cyan docs/assets/source/subsurface.png
 
 # Or using Python
 python3 << 'EOF'
@@ -62,8 +62,8 @@ from PIL import Image, ImageDraw
 img = Image.new('RGB', (800, 600), (17, 34, 51))
 draw = ImageDraw.Draw(img)
 draw.text((400, 300), "Subsurface Placeholder", fill=(255, 255, 255), anchor="mm")
-img.save('src/assets/source/subsurface.png')
-print("Created placeholder: src/assets/source/subsurface.png")
+img.save('docs/assets/source/subsurface.png')
+print("Created placeholder: docs/assets/source/subsurface.png")
 EOF
 ```
 
@@ -80,10 +80,10 @@ brew install git-lfs  # macOS
 git lfs install
 
 # Track PNG files in this directory
-git lfs track "src/assets/source/*.png"
+git lfs track "docs/assets/source/*.png"
 
 # Add the file
-git add src/assets/source/subsurface.png .gitattributes
+git add docs/assets/source/subsurface.png .gitattributes
 git commit -m "Add subsurface source image with Git LFS"
 ```
 

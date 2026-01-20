@@ -42,14 +42,14 @@ A modern, lightweight website for Applied Environmental Intelligence showcasing 
 3. **Add the subsurface source image** (required for reveal animation)
    
    **Option A: Use your own image**
-   - Place your `subsurface.png` file in `src/assets/source/`
+   - Place your `subsurface.png` file in `docs/assets/source/`
    
    **Option B: Create a test placeholder**
    ```bash
    python scripts/create_placeholder.py
    ```
    
-   See [src/assets/source/README.md](src/assets/source/README.md) for more details.
+   See [docs/assets/source/README.md](docs/assets/source/README.md) for more details.
 
 4. **Build the site**
    ```bash
@@ -69,12 +69,15 @@ AEI-website/
 ├── .github/
 │   └── workflows/
 │       └── pages.yml          # GitHub Actions workflow for automated deployment
-├── src/                       # Source files (edit these)
+├── docs/                      # Source files (edit these)
 │   ├── index.html            # Main HTML page
-│   └── assets/
-│       └── source/
-│           ├── README.md      # Instructions for source assets
-│           └── subsurface.png # Source image for reveal animation (add this!)
+│   ├── assets/
+│   │   └── source/
+│   │       ├── README.md      # Instructions for source assets
+│   │       └── subsurface.png # Source image for reveal animation (add this!)
+│   ├── CONTRIBUTING.md       # Contribution guidelines
+│   ├── MAMBA_GUIDE.md        # Mamba/Conda guide
+│   └── UPDATE_GUIDE.md       # Guide for updating content
 ├── scripts/                   # Build scripts
 │   ├── generate_cable_animation.py
 │   ├── generate_reveal_subsurface.py
@@ -84,9 +87,6 @@ AEI-website/
 │   └── animations/           # Generated animation assets
 │       ├── cable_animation.gif
 │       └── subsurface_reveal.gif
-├── docs/                      # Documentation
-│   ├── UPDATE_GUIDE.md       # Guide for updating content
-│   └── CONTRIBUTING.md       # Contribution guidelines
 ├── build.py                   # Build orchestration script
 ├── environment.yml            # Conda/Mamba environment specification
 ├── .gitignore
@@ -98,7 +98,7 @@ AEI-website/
 The build script (`build.py`) performs the following steps:
 
 1. **Clean**: Removes and recreates `dist/` directory
-2. **Copy**: Copies static assets from `src/` to `dist/`
+2. **Copy**: Copies static assets from `docs/` to `dist/`
 3. **Generate**: Runs Python scripts to create animation GIFs
 4. **Validate**: Checks that all expected outputs exist
 
@@ -141,17 +141,17 @@ This creates `cable_animation.gif` in the specified location (~2-4 MB, 1920×108
 
 ```bash
 # First, make sure you have the source image
-# Place your PNG in: src/assets/source/subsurface.png
-# (See src/assets/source/README.md for details)
+# Place your PNG in: docs/assets/source/subsurface.png
+# (See docs/assets/source/README.md for details)
 
 # Generate with default paths
 python scripts/generate_reveal_subsurface.py \
-  --input src/assets/source/subsurface.png \
+  --input docs/assets/source/subsurface.png \
   --output subsurface_reveal.gif
 
 # Or generate directly to dist/animations/
 python scripts/generate_reveal_subsurface.py \
-  --input src/assets/source/subsurface.png \
+  --input docs/assets/source/subsurface.png \
   --output dist/animations/subsurface_reveal.gif
 ```
 
@@ -169,7 +169,7 @@ python scripts/generate_cable_animation.py --output test_animations/cable.gif
 
 # Generate subsurface reveal (if you have the source image)
 python scripts/generate_reveal_subsurface.py \
-  --input src/assets/source/subsurface.png \
+  --input docs/assets/source/subsurface.png \
   --output test_animations/reveal.gif
 
 # View the results
@@ -204,7 +204,7 @@ The site automatically deploys to GitHub Pages on every push to the `main` branc
 
 The HTML uses **relative paths** for all animations and assets:
 ```html
-<!-- In src/index.html -->
+<!-- In docs/index.html -->
 <img src="animations/cable_animation.gif" />
 <img src="animations/subsurface_reveal.gif" />
 ```
@@ -236,12 +236,12 @@ You can also trigger a deployment manually:
 
 ## 📝 Updating Content
 
-**Important**: Always edit files in `src/`, never in `dist/`!
+**Important**: Always edit files in `docs/`, never in `dist/`!
 
-- **Update HTML**: Edit [src/index.html](src/index.html)
-- **Add new pages**: Create new HTML files in `src/` and update navigation
+- **Update HTML**: Edit [docs/index.html](docs/index.html)
+- **Add new pages**: Create new HTML files in `docs/` and update navigation
 - **Regenerate animations**: Modify scripts in `scripts/` and rebuild
-- **Add images**: Place in `src/assets/` and reference with relative paths
+- **Add images**: Place in `docs/assets/` and reference with relative paths
 - **Embed LinkedIn posts**: Use Company Profile widget for automatic latest posts (see guide below)
 - **Embed YouTube videos**: Use iframe embed codes with responsive containers
 
@@ -251,7 +251,7 @@ For detailed instructions including **automatic LinkedIn post embedding**, see [
 
 **For automatic latest posts from your company page:**
 
-1. Add to `src/index.html`:
+1. Add to `docs/index.html`:
    ```html
    <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
    <script type="IN/CompanyProfile" data-id="YOUR_COMPANY_ID" data-format="inline"></script>
@@ -281,12 +281,12 @@ Contributions are welcome! Please read [docs/CONTRIBUTING.md](docs/CONTRIBUTING.
 
 ### Build fails with "subsurface.png not found"
 
-Add the source image to `src/assets/source/subsurface.png`. See [src/assets/source/README.md](src/assets/source/README.md).
+Add the source image to `docs/assets/source/subsurface.png`. See [docs/assets/source/README.md](docs/assets/source/README.md).
 
 ### Animations don't appear on the site
 
 1. Check that both GIF files exist in `dist/animations/`
-2. Verify paths in `src/index.html` use relative URLs: `animations/filename.gif`
+2. Verify paths in `docs/index.html` use relative URLs: `animations/filename.gif`
 3. Clear browser cache and hard reload (Ctrl+Shift+R / Cmd+Shift+R)
 
 ### GitHub Pages deployment fails

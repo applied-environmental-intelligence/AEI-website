@@ -146,7 +146,7 @@
       The CDN URL below is only for preview/demo convenience.
       Source page: https://pixabay.com/videos/ai-generated-river-mountain-valley-349066/
     -->
-    <video id="heroVideo" class="hero-video" autoplay muted playsinline preload="auto">
+    <video id="heroVideo" class="hero-video" aria-hidden="true" autoplay muted playsinline preload="auto">
       <source src="https://cdn.pixabay.com/video/2026/04/26/349066_large.mp4" type="video/mp4" />
     </video>
 
@@ -170,6 +170,7 @@
   <script>
     (() => {
       const video = document.getElementById('heroVideo');
+      if (!video) return;
       const segmentStart = 0;
       const segmentDuration = 15;
       video.addEventListener('loadedmetadata', () => {
@@ -184,7 +185,9 @@
       });
 
       const canvas = document.getElementById('geoOverlay');
+      if (!canvas) return;
       const ctx = canvas.getContext('2d');
+      if (!ctx) return;
       let W = 0, H = 0, DPR = Math.min(2, window.devicePixelRatio || 1);
 
       const sensors = [

@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Geophysical Cinematic Hero Demo</title>
+  <style>
+    :root {
+      --cyan: 128, 245, 255;
+      --blue: 94, 185, 255;
+      --ink: 5, 13, 24;
+      --white: 248, 252, 255;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: rgb(var(--ink)); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+      isolation: isolate;
+      color: rgb(var(--white));
+      background: radial-gradient(circle at 65% 35%, rgba(76, 139, 159, .35), transparent 42%), rgb(var(--ink));
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.03);
+      filter: brightness(.72) contrast(1.05) saturate(.9);
+      z-index: -4;
+    }
+
+    .cinema-grade {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(2, 8, 18, .78) 0%, rgba(2, 8, 18, .46) 34%, rgba(2, 8, 18, .18) 70%, rgba(2, 8, 18, .45) 100%),
+        linear-gradient(180deg, rgba(0, 0, 0, .18) 0%, rgba(0, 0, 0, .08) 40%, rgba(0, 0, 0, .52) 100%);
+    }
+
+    .vignette {
+      position: absolute;
+      inset: -2%;
+      z-index: -1;
+      pointer-events: none;
+      box-shadow: inset 0 0 15vw rgba(0, 0, 0, .64);
+    }
+
+    #geoOverlay {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      width: 100%;
+      height: 100%;
+      opacity: .78;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .copy {
+      position: relative;
+      width: min(760px, 90vw);
+      padding: clamp(5rem, 12vh, 9rem) 0 0 clamp(1.5rem, 8vw, 7rem);
+      text-shadow: 0 2px 24px rgba(0, 0, 0, .55);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      margin-bottom: 1.05rem;
+      color: rgba(var(--cyan), .86);
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      font-size: clamp(.72rem, .85vw, .86rem);
+      font-weight: 650;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: .62rem;
+      height: .62rem;
+      border-radius: 999px;
+      background: rgba(var(--cyan), .9);
+      box-shadow: 0 0 20px rgba(var(--cyan), .8);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 720px;
+      font-size: clamp(2.45rem, 5vw, 5.7rem);
+      line-height: .96;
+      letter-spacing: -.06em;
+      font-weight: 760;
+    }
+
+    .subline {
+      margin: 1.35rem 0 0;
+      max-width: 610px;
+      color: rgba(var(--white), .74);
+      font-size: clamp(1rem, 1.45vw, 1.25rem);
+      line-height: 1.55;
+    }
+
+    .system-note {
+      position: absolute;
+      left: clamp(1.5rem, 8vw, 7rem);
+      bottom: clamp(1.4rem, 5vh, 3rem);
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: rgba(var(--white), .7);
+      font-size: .78rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .pill {
+      border: 1px solid rgba(var(--cyan), .25);
+      background: rgba(2, 18, 32, .32);
+      backdrop-filter: blur(14px);
+      border-radius: 999px;
+      padding: .55rem .85rem;
+    }
+
+    @media (max-width: 720px) {
+      .copy { padding-top: 6rem; }
+      .subline { display: none; }
+      .system-note { display: none; }
+      .hero-video { transform: scale(1.08); }
+    }
+  </style>
+</head>
+<body>
+  <main class="hero" aria-label="Real-time intelligence for the ground beneath critical systems">
+    <!--
+      Production note:
+      Download the source video from Pixabay and self-host it as /assets/geophysical-nature-loop.mp4.
+      The CDN URL below is only for preview/demo convenience.
+      Source page: https://pixabay.com/videos/ai-generated-river-mountain-valley-349066/
+    -->
+    <video id="heroVideo" class="hero-video" autoplay muted playsinline preload="auto">
+      <source src="https://cdn.pixabay.com/video/2026/04/26/349066_large.mp4" type="video/mp4" />
+    </video>
+
+    <canvas id="geoOverlay" aria-hidden="true"></canvas>
+    <div class="cinema-grade" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <section class="copy">
+      <div class="eyebrow">Geophysical Digital Twin</div>
+      <h1>Real-time intelligence for the ground beneath critical systems.</h1>
+      <p class="subline">Continuous sensing, anomaly detection, and autonomous model updates for infrastructure, water, agriculture, and ground-risk monitoring.</p>
+    </section>
+
+    <div class="system-note" aria-hidden="true">
+      <span class="pill">Subsurface sensing</span>
+      <span class="pill">Groundwater intelligence</span>
+      <span class="pill">Agentic anomaly detection</span>
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      const video = document.getElementById('heroVideo');
+      const segmentStart = 0;
+      const segmentDuration = 15;
+      video.addEventListener('loadedmetadata', () => {
+        video.currentTime = segmentStart;
+        video.play().catch(() => {});
+      });
+      video.addEventListener('timeupdate', () => {
+        if (video.currentTime >= segmentStart + segmentDuration) {
+          video.currentTime = segmentStart + 0.02;
+          video.play().catch(() => {});
+        }
+      });
+
+      const canvas = document.getElementById('geoOverlay');
+      const ctx = canvas.getContext('2d');
+      let W = 0, H = 0, DPR = Math.min(2, window.devicePixelRatio || 1);
+
+      const sensors = [
+        [.13, .67], [.22, .72], [.34, .66], [.48, .70], [.61, .63], [.76, .69], [.87, .61],
+        [.18, .81], [.39, .84], [.58, .80], [.72, .83]
+      ];
+
+      const agentPaths = [
+        { a: 0, b: 3, offset: 0.0 },
+        { a: 2, b: 6, offset: 0.22 },
+        { a: 7, b: 10, offset: 0.45 },
+        { a: 1, b: 8, offset: 0.68 }
+      ];
+
+      function resize() {
+        W = canvas.clientWidth;
+        H = canvas.clientHeight;
+        DPR = Math.min(2, window.devicePixelRatio || 1);
+        canvas.width = Math.floor(W * DPR);
+        canvas.height = Math.floor(H * DPR);
+        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      }
+
+      function line(x1, y1, x2, y2, alpha, width = 1) {
+        ctx.strokeStyle = `rgba(128,245,255,${alpha})`;
+        ctx.lineWidth = width;
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+      }
+
+      function dot(x, y, r, alpha) {
+        const g = ctx.createRadialGradient(x, y, 0, x, y, r * 6);
+        g.addColorStop(0, `rgba(148,248,255,${alpha})`);
+        g.addColorStop(.22, `rgba(96,220,255,${alpha * .35})`);
+        g.addColorStop(1, 'rgba(96,220,255,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(x, y, r * 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = `rgba(220,255,255,${Math.min(1, alpha + .2)})`;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      function bezier(p0, p1, p2, p3, t) {
+        const u = 1 - t;
+        return [
+          u*u*u*p0[0] + 3*u*u*t*p1[0] + 3*u*t*t*p2[0] + t*t*t*p3[0],
+          u*u*u*p0[1] + 3*u*u*t*p1[1] + 3*u*t*t*p2[1] + t*t*t*p3[1]
+        ];
+      }
+
+      function drawContours(t) {
+        ctx.save();
+        ctx.globalAlpha = .22;
+        ctx.lineWidth = 1;
+        for (let j = 0; j < 8; j++) {
+          const yBase = H * (.72 + j * .035);
+          ctx.strokeStyle = `rgba(118,236,255,${.20 - j * .012})`;
+          ctx.beginPath();
+          for (let i = 0; i <= 120; i++) {
+            const x = W * (i / 120);
+            const y = yBase + Math.sin(i * .12 + t * .55 + j * .8) * (6 + j * 1.4) + Math.sin(i * .035 + j) * 9;
+            if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+          }
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      function drawWireTerrain(t) {
+        ctx.save();
+        ctx.globalAlpha = .14;
+        ctx.strokeStyle = 'rgba(128,245,255,.55)';
+        ctx.lineWidth = 1;
+        const baseY = H * .74;
+        const rows = 6;
+        for (let r = 0; r < rows; r++) {
+          ctx.beginPath();
+          for (let i = 0; i <= 80; i++) {
+            const x = W * (i / 80);
+            const y = baseY + r * H * .035 + Math.sin(i * .18 + r * .7 + t * .2) * 4;
+            if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+          }
+          ctx.stroke();
+        }
+        for (let c = 0; c < 18; c++) {
+          const x = W * (.05 + c * .055);
+          line(x, baseY - 16, x + Math.sin(c) * 24, H * .92, .08, 1);
+        }
+        ctx.restore();
+      }
+
+      function drawRiskFields(t) {
+        ctx.save();
+        // landslide deformation on distant slope, intentionally faint
+        const cx = W * .76, cy = H * .55;
+        for (let k = 0; k < 5; k++) {
+          ctx.strokeStyle = `rgba(140,246,255,${.09 + k * .018})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.ellipse(cx + k * 12, cy + k * 8, 70 + k * 18, 18 + k * 5, -0.22, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        // groundwater/flood plain contour
+        const gx = W * .49, gy = H * .77;
+        for (let k = 0; k < 4; k++) {
+          ctx.strokeStyle = `rgba(88,185,255,${.11 + .02 * Math.sin(t + k)})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.ellipse(gx, gy + k * 13, 120 + k * 30, 22 + k * 4, 0.08, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      function drawNetwork(t) {
+        const pts = sensors.map(([x, y]) => [x * W, y * H]);
+        ctx.save();
+        ctx.globalAlpha = .65;
+        const pairs = [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[7,8],[8,9],[9,10],[0,7],[2,8],[4,9],[6,10],[1,3],[3,5],[5,10]];
+        pairs.forEach(([a,b], idx) => {
+          const pulse = .07 + .06 * (Math.sin(t * 1.2 + idx * .9) + 1) / 2;
+          line(pts[a][0], pts[a][1], pts[b][0], pts[b][1], pulse, 1);
+        });
+        pts.forEach((p, idx) => dot(p[0], p[1], 2.1 + (idx % 3) * .35, .50 + .22 * Math.sin(t * 1.7 + idx)));
+        ctx.restore();
+      }
+
+      function drawAgents(t) {
+        const pts = sensors.map(([x, y]) => [x * W, y * H]);
+        ctx.save();
+        agentPaths.forEach((path, idx) => {
+          const p0 = pts[path.a], p3 = pts[path.b];
+          const midY = Math.min(p0[1], p3[1]) - H * (.09 + .025 * idx);
+          const p1 = [p0[0] + (p3[0]-p0[0]) * .28, midY];
+          const p2 = [p0[0] + (p3[0]-p0[0]) * .72, midY + Math.sin(idx) * H * .03];
+          const u = (t / segmentDuration + path.offset) % 1;
+          const pos = bezier(p0, p1, p2, p3, u);
+          ctx.strokeStyle = 'rgba(128,245,255,.10)';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          for (let s = 0; s <= 30; s++) {
+            const p = bezier(p0, p1, p2, p3, s/30);
+            if (s === 0) ctx.moveTo(p[0], p[1]); else ctx.lineTo(p[0], p[1]);
+          }
+          ctx.stroke();
+          dot(pos[0], pos[1], 2.7, .78);
+        });
+        ctx.restore();
+      }
+
+      function render(now) {
+        const t = ((now / 1000) % segmentDuration);
+        ctx.clearRect(0, 0, W, H);
+
+        // Keep tech overlay subtle: below the hero copy and mostly in the lower half.
+        drawContours(t);
+        drawWireTerrain(t);
+        drawRiskFields(t);
+        drawNetwork(t);
+        drawAgents(t);
+
+        requestAnimationFrame(render);
+      }
+
+      window.addEventListener('resize', resize, { passive: true });
+      resize();
+      requestAnimationFrame(render);
+    })();
+  </script>
+</body>
+</html>

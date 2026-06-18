@@ -6,7 +6,7 @@
     <title>Applied Environmental Intelligence</title>
     <meta
       name="description"
-      content="AEI turns distributed ground sensing, satellite imagery, and physics-based models into real-time insight on the ground beneath critical infrastructure — for climate and natural-risk decisions."
+      content="AEI turns distributed ground sensing, satellite imagery, and physics-based models into real-time insight on the ground beneath critical infrastructure for climate and natural risk decisions."
     />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T592QEDC5"></script>
@@ -30,6 +30,7 @@
         --accent-ink: #ffffff;
         --data: #1f9e6e;
         --shadow: 0 8px 30px rgba(20, 22, 28, 0.1);
+        --hero-cyan: 128, 245, 255;
       }
 
       * {
@@ -58,6 +59,11 @@
       a.navlink:hover {
         color: var(--ink);
       }
+        a.navlink:focus-visible {
+          outline: 2px solid var(--accent);
+          outline-offset: 3px;
+          color: var(--ink);
+        }
 
       /* Scroll-reveal: elements start hidden, JS adds .is-in to reveal.
          If JS is disabled, the no-js fallback below keeps everything visible. */
@@ -72,6 +78,57 @@
         transform: none;
       }
 
+      .hero-video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.03);
+        filter: brightness(0.72) contrast(1.05) saturate(0.9);
+        z-index: -4;
+      }
+
+      .cinema-grade {
+        position: absolute;
+        inset: 0;
+        z-index: -3;
+        pointer-events: none;
+        background:
+          linear-gradient(
+            90deg,
+            rgba(2, 8, 18, 0.78) 0%,
+            rgba(2, 8, 18, 0.46) 34%,
+            rgba(2, 8, 18, 0.18) 70%,
+            rgba(2, 8, 18, 0.45) 100%
+          ),
+          linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.18) 0%,
+            rgba(0, 0, 0, 0.08) 40%,
+            rgba(0, 0, 0, 0.52) 100%
+          );
+      }
+
+      .hero-vignette {
+        position: absolute;
+        inset: -2%;
+        z-index: -1;
+        pointer-events: none;
+        box-shadow: inset 0 0 15vw rgba(0, 0, 0, 0.64);
+      }
+
+      #geoOverlay {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        width: 100%;
+        height: 100%;
+        opacity: 0.78;
+        mix-blend-mode: screen;
+        pointer-events: none;
+      }
+
       @media (max-width: 1120px) {
         .brand-sub {
           display: none;
@@ -84,8 +141,19 @@
         .nav-hide-sm {
           display: none;
         }
+        .hero-video {
+          transform: scale(1.08);
+        }
       }
     </style>
+    <noscript>
+      <style>
+        [data-reveal] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
   </head>
 
   <body id="top">
@@ -94,9 +162,9 @@
     >
       <a href="#top" style="display: flex; align-items: baseline; gap: 11px; text-decoration: none; color: inherit;">
         <span style="font-size: 25px; font-weight: 800; letter-spacing: -0.045em;">AEI</span>
-        <span class="brand-sub" style="font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); white-space: nowrap;">Applied Environmental Intelligence</span>
+        <span class="brand-sub" style="font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); white-space: nowrap;">Applied Environmental Intelligence</span>
       </a>
-      <nav class="floating-nav" style="display: flex; align-items: center; gap: 20px;">
+      <nav aria-label="Primary" class="floating-nav" style="display: flex; align-items: center; gap: 20px;">
         <a class="navlink" href="#platform">Platform</a>
         <a class="navlink nav-hide-sm" href="#difference">Difference</a>
         <a class="navlink" href="#capabilities">Capabilities</a>
@@ -109,13 +177,16 @@
 
     <section
       id="hero"
-      style="position: relative; min-height: 92vh; display: flex; align-items: center; overflow: hidden; background: #0a0c0f;"
+      style="position: relative; min-height: 92vh; display: flex; align-items: center; overflow: hidden; isolation: isolate; background: radial-gradient(circle at 65% 35%, rgba(76, 139, 159, 0.35), transparent 42%), #050d18;"
     >
-      <canvas id="heroCanvas" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block;"></canvas>
-      <div style="position: absolute; inset: 0; z-index: 1; background: linear-gradient(95deg, rgba(8, 10, 13, 0.94) 0%, rgba(8, 10, 13, 0.8) 32%, rgba(8, 10, 13, 0.34) 64%, rgba(8, 10, 13, 0.52) 100%);"></div>
-      <div style="position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(8, 10, 13, 0.55) 0%, transparent 20%, transparent 66%, rgba(8, 10, 13, 0.92) 100%);"></div>
+      <video id="heroVideo" class="hero-video" autoplay muted playsinline preload="auto">
+        <source src="https://cdn.pixabay.com/video/2026/04/26/349066_large.mp4" type="video/mp4" />
+      </video>
+      <canvas id="geoOverlay" aria-hidden="true"></canvas>
+      <div class="cinema-grade" aria-hidden="true"></div>
+      <div class="hero-vignette" aria-hidden="true"></div>
 
-      <div style="position: relative; z-index: 2; max-width: 1240px; width: 100%; margin: 0 auto; padding: 0 clamp(20px, 5vw, 72px);">
+      <div style="position: relative; z-index: 2; max-width: 1240px; width: 100%; margin: 0 auto; padding: 0 clamp(20px, 5vw, 72px); text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55);">
         <div style="display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px; border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 100px; background: rgba(255, 255, 255, 0.04);">
           <span id="liveDot" style="width: 8px; height: 8px; border-radius: 50%; background: #39d3a0;"></span>
           <span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255, 255, 255, 0.78);">Live feed</span>
@@ -124,13 +195,13 @@
         </div>
 
         <h1 style="margin: 24px 0 0; max-width: 15em; font-size: clamp(42px, 6.2vw, 82px); line-height: 0.97; letter-spacing: -0.035em; font-weight: 800; color: #f5f6f7; text-wrap: balance;">Real-time intelligence for a moving planet.</h1>
-        <p style="margin: 26px 0 0; max-width: 33em; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.5; color: rgba(255, 255, 255, 0.72);">AEI turns distributed ground sensing, satellite imagery, and physics-based models into live insight on the ground beneath critical infrastructure — for climate and natural-risk decisions.</p>
+        <p style="margin: 26px 0 0; max-width: 33em; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.5; color: rgba(255, 255, 255, 0.72);">AEI turns distributed ground sensing, satellite imagery, and physics-based models into live insight on the ground beneath critical infrastructure for climate and natural risk decisions.</p>
         <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px;">
           <a href="#contact" style="display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: var(--accent-ink); padding: 14px 24px; border-radius: 2px; font-size: 15px; font-weight: 600; text-decoration: none;">Request a demo</a>
           <a href="#platform" style="display: inline-flex; align-items: center; gap: 8px; color: #f5f6f7; padding: 14px 4px; font-size: 15px; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.5);">Explore the platform →</a>
         </div>
         <div style="margin-top: 42px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, 0.15); display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255, 255, 255, 0.58); max-width: 40em;">
-          <span>Seismic</span><span style="opacity: 0.4;">/</span><span>Distributed acoustic sensing</span><span style="opacity: 0.4;">/</span><span>Satellite</span><span style="opacity: 0.4;">/</span><span style="opacity: 0.7;">Geodetic — v2.0</span>
+          <span>Seismic</span><span style="opacity: 0.4;">/</span><span>Distributed acoustic sensing</span><span style="opacity: 0.4;">/</span><span>Satellite</span><span style="opacity: 0.4;">/</span><span style="opacity: 0.7;">Geodetic (v2.0)</span>
         </div>
       </div>
     </section>
@@ -138,18 +209,18 @@
     <section id="platform" style="background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: clamp(56px, 8vw, 116px) clamp(20px, 5vw, 72px);">
       <div style="max-width: 1240px; margin: 0 auto;">
         <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">01 / The platform</div>
-        <h2 data-reveal style="margin: 18px 0 0; max-width: 18em; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800; text-wrap: balance;">We measure the Earth where it meets the things you build on it.</h2>
-        <p data-reveal style="margin: 22px 0 0; max-width: 40em; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: var(--muted);">Ground-based sensing is our edge. We operate dense networks of seismic and distributed acoustic sensors, fuse them with satellite imagery, and run physics-based models to image the subsurface and surface as they change — continuously, and in context. Geodetic networks join in v2.0, through a sensing partner.</p>
+        <h2 data-reveal style="margin: 18px 0 0; max-width: 18em; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800; text-wrap: balance;">We measure the Earth beneath what you build.</h2>
+        <p data-reveal style="margin: 22px 0 0; max-width: 40em; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: var(--muted);">Ground-based sensing is our edge. We operate dense networks of seismic and distributed acoustic sensors, fuse them with satellite imagery, and run physics-based models. Together, they image the subsurface and surface as conditions change. Geodetic networks join in v2.0 through a sensing partner.</p>
 
         <div style="margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line);">
           <div data-reveal style="background: var(--surface); padding: 30px 26px;">
             <div style="font-size: 12px; color: var(--accent); letter-spacing: 0.08em;">01</div>
             <h3 style="margin: 16px 0 8px; font-size: 19px; font-weight: 700; letter-spacing: -0.01em;">Ground-truth sensing</h3>
-            <p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted);">Dense seismic and distributed acoustic sensing networks — the on-the-ground signal others don't have.</p>
+            <p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted);">Dense seismic and distributed acoustic sensing networks provide the on-the-ground signal others do not have.</p>
           </div>
           <div data-reveal data-reveal-delay="80" style="background: var(--surface); padding: 30px 26px;">
             <div style="font-size: 12px; color: var(--accent); letter-spacing: 0.08em;">02</div>
-            <h3 style="margin: 16px 0 8px; font-size: 19px; font-weight: 700; letter-spacing: -0.01em;">Multi-source fusion</h3>
+            <h3 style="margin: 16px 0 8px; font-size: 19px; font-weight: 700; letter-spacing: -0.01em;">Multi-modal data fusion</h3>
             <p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted);">Ground sensors and satellite imagery resolved into one coherent picture of the landscape over time.</p>
           </div>
           <div data-reveal data-reveal-delay="160" style="background: var(--surface); padding: 30px 26px;">
@@ -160,7 +231,7 @@
           <div data-reveal data-reveal-delay="240" style="background: var(--surface); padding: 30px 26px;">
             <div style="font-size: 12px; color: var(--accent); letter-spacing: 0.08em;">04</div>
             <h3 style="margin: 16px 0 8px; font-size: 19px; font-weight: 700; letter-spacing: -0.01em;">Transparent agentic pipelines</h3>
-            <p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted);">Robust, auditable pipelines that show their work — from raw signal to the call you act on.</p>
+            <p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted);">Robust, auditable pipelines that show their work from raw signal to the call you act on.</p>
           </div>
         </div>
       </div>
@@ -170,17 +241,17 @@
       <div style="max-width: 1240px; margin: 0 auto;">
         <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">02 / The difference</div>
         <h2 data-reveal style="margin: 18px 0 0; max-width: 15em; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800; text-wrap: balance;">Most tools see half the picture. We model the whole system.</h2>
-        <p data-reveal style="margin: 22px 0 0; max-width: 42em; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: var(--muted);">The field is split between ground-sensor companies and satellite companies — and nearly all of them are purely data-centric. AEI fuses both and adds the physics. That's why our picture holds together where single-source, data-only tools fall apart: under noise, at the edges, and when a decision actually has to be defended.</p>
+        <p data-reveal style="margin: 22px 0 0; max-width: 42em; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: var(--muted);">The field is split between ground-sensor companies and satellite companies, and nearly all of them are purely data-centric. AEI fuses both and adds the physics. That's why our picture holds together where single-source, data-only tools fall apart.</p>
 
         <div style="margin-top: clamp(40px, 5vw, 60px); display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: clamp(16px, 2vw, 24px);">
           <div data-reveal style="background: var(--surface-2); border: 1px solid var(--line); border-radius: 3px; padding: clamp(26px, 3vw, 34px);">
             <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">The status quo</div>
-            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">—</span><span>Ground sensors <em>or</em> satellite — rarely fused</span></div>
-            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">—</span><span>Purely data-centric, with no physical model of the Earth</span></div>
-            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">—</span><span>Siloed data streams and siloed analysis</span></div>
-            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">—</span><span>Insight locked behind deep, scarce expertise</span></div>
-            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">—</span><span>Black-box outputs that are hard to audit or trust</span></div>
-            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">—</span><span>Backward-looking snapshots and static reports</span></div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">-</span><span>Ground sensors <em>or</em> satellite, rarely fused</span></div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">-</span><span>Purely data-centric, with no physical model of the Earth</span></div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">-</span><span>Siloed data streams and siloed analysis</span></div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">-</span><span>Insight locked behind deep, scarce expertise</span></div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">-</span><span>Black-box outputs that are hard to audit or trust</span></div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">-</span><span>Backward-looking snapshots and static reports</span></div>
           </div>
 
           <div data-reveal data-reveal-delay="120" style="background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 3px; padding: clamp(26px, 3vw, 34px);">
@@ -203,55 +274,50 @@
             <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">03 / Capabilities</div>
             <h2 data-reveal style="margin: 18px 0 0; max-width: 16em; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800;">Four sensing modalities, one model of the ground.</h2>
           </div>
-          <p data-reveal style="margin: 0; max-width: 24em; font-size: 15px; line-height: 1.6; color: var(--muted);">Each layer is independently strong. Together they resolve motion, strain, and structure that any single source would miss.</p>
         </div>
 
         <div style="margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); gap: clamp(16px, 2vw, 24px);">
           <div data-reveal style="border: 1px solid var(--line); background: var(--surface); border-radius: 3px; overflow: hidden; display: flex; flex-direction: column;">
-            <div style="position: relative; aspect-ratio: 16/10; background: repeating-linear-gradient(90deg, var(--surface-2) 0 9px, var(--surface) 9px 18px);">
-              <div style="position: absolute; inset: 0; display: flex; align-items: center; padding: 0 14px;"><div style="width: 100%; height: 2px; background: var(--accent); clip-path: polygon(0 50%, 8% 50%, 11% 10%, 15% 92%, 19% 35%, 23% 50%, 100% 50%); transform: scaleY(14); transform-origin: center;"></div></div>
+            <div style="position: relative; aspect-ratio: 16/10; background: var(--surface-2);">
+              <img src="assets/capabilities/das-car.png" alt="Offshore distributed acoustic sensing waveform data from Shi, Ni, Denolle et al." style="width: 100%; height: 100%; object-fit: contain; background: var(--surface); display: block;" />
             </div>
             <div style="padding: 22px 22px 26px;">
               <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);">Seismic</div>
               <h3 style="margin: 11px 0 8px; font-size: 18px; font-weight: 700;">Ground motion &amp; micro-seismicity</h3>
-              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Dense arrays catch the tremors, slips, and vibrations that precede failure — long before they're felt.</p>
+              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Dense arrays catch the tremors, slips, and vibrations that precede failure long before they are felt.</p>
             </div>
           </div>
 
           <div data-reveal data-reveal-delay="80" style="border: 1px solid var(--line); background: var(--surface); border-radius: 3px; overflow: hidden; display: flex; flex-direction: column;">
-            <div style="position: relative; aspect-ratio: 16/10; background: repeating-linear-gradient(90deg, var(--surface-2) 0 9px, var(--surface) 9px 18px);">
-              <div style="position: absolute; inset: 0; background-image: radial-gradient(circle, var(--data) 1.5px, transparent 1.6px); background-size: 22px 22px; opacity: 0.8;"></div>
+            <div style="position: relative; aspect-ratio: 16/10; background: var(--surface-2);">
+              <img src="https://images.pexels.com/photos/13766329/pexels-photo-13766329.jpeg?auto=compress&cs=tinysrgb&w=1400&h=900&fit=crop" alt="Seattle SoDo coastal industrial waterfront used to represent land subsidence monitoring" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
             </div>
             <div style="padding: 22px 22px 26px;">
               <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;"><span style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);">Geodetic</span><span style="font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 100px; padding: 2px 8px;">v2.0 · with partner</span></div>
               <h3 style="margin: 11px 0 8px; font-size: 18px; font-weight: 700;">Surface deformation &amp; strain</h3>
-              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Millimeter-scale movement of the ground surface — subsidence, uplift, and creep. Joining the platform in v2.0 through a sensing partner.</p>
+              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Millimeter-scale movement of the ground surface, including subsidence, uplift, and creep. Joining the platform in v2.0 through a sensing partner.</p>
             </div>
           </div>
 
           <div data-reveal data-reveal-delay="160" style="border: 1px solid var(--line); background: var(--surface); border-radius: 3px; overflow: hidden; display: flex; flex-direction: column;">
-            <div style="position: relative; aspect-ratio: 16/10; background: repeating-linear-gradient(135deg, var(--surface-2) 0 7px, var(--surface) 7px 14px);">
-              <div style="position: absolute; left: 0; right: 0; top: 50%; height: 3px; background: var(--ink); opacity: 0.55;"></div>
-              <div style="position: absolute; left: 18%; top: calc(50% - 5px); width: 9px; height: 9px; border-radius: 50%; background: var(--data);"></div>
-              <div style="position: absolute; left: 54%; top: calc(50% - 5px); width: 9px; height: 9px; border-radius: 50%; background: var(--data);"></div>
-              <div style="position: absolute; left: 80%; top: calc(50% - 5px); width: 9px; height: 9px; border-radius: 50%; background: var(--data);"></div>
+            <div style="position: relative; aspect-ratio: 16/10; background: var(--surface-2);">
+              <img src="https://images.unsplash.com/photo-1465447142348-e9952c393450?auto=format&fit=crop&w=1400&q=80" alt="Fiber optic cable installation for distributed sensing" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
             </div>
             <div style="padding: 22px 22px 26px;">
               <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);">Distributed acoustic sensing</div>
               <h3 style="margin: 11px 0 8px; font-size: 18px; font-weight: 700;">Every meter of fiber, a sensor</h3>
-              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Existing fiber routes become continuous acoustic arrays — kilometers of coverage, no new hardware in the ground.</p>
+              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Existing fiber routes become continuous acoustic arrays with kilometers of coverage and no new hardware in the ground.</p>
             </div>
           </div>
 
           <div data-reveal data-reveal-delay="240" style="border: 1px solid var(--line); background: var(--surface); border-radius: 3px; overflow: hidden; display: flex; flex-direction: column;">
-            <div style="position: relative; aspect-ratio: 16/10; background: repeating-linear-gradient(45deg, var(--surface-2) 0 9px, var(--surface) 9px 18px);">
-              <div style="position: absolute; inset: 14px; border: 1px dashed var(--ink); opacity: 0.4;"></div>
-              <div style="position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 24px 24px; opacity: 0.6;"></div>
+            <div style="position: relative; aspect-ratio: 16/10; background: var(--surface-2);">
+              <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1400&q=80" alt="Satellite-style landscape view" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
             </div>
             <div style="padding: 22px 22px 26px;">
               <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);">Satellite</div>
               <h3 style="margin: 11px 0 8px; font-size: 18px; font-weight: 700;">Landscape-scale context</h3>
-              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Optical and radar imagery ties local sensing to the wider terrain — wide area, repeat coverage, change over time.</p>
+              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Optical and radar imagery ties local sensing to wider terrain with broad coverage and change over time.</p>
             </div>
           </div>
         </div>
@@ -262,7 +328,7 @@
       <div style="max-width: 1240px; margin: 0 auto;">
         <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">04 / The pipeline</div>
         <h2 data-reveal style="margin: 18px 0 0; max-width: 17em; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800;">From noisy signal to a decision you can defend.</h2>
-        <p data-reveal style="margin: 22px 0 0; max-width: 40em; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: var(--muted);">Field data is messy, disaggregated, and incomplete. Our pipelines are agentic but never opaque — grounded in earth science, robust to noise, and auditable end to end, with uncertainty carried through every step. So the output is something you can take to a regulator, a board, or an engineering team.</p>
+        <p data-reveal style="margin: 22px 0 0; max-width: 40em; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: var(--muted);">Field data is messy, disaggregated, and incomplete. Our pipelines are agentic but never opaque. They are grounded in earth science, robust to noise, and auditable end to end, with uncertainty carried through every step. So you can take the output to a regulator, board, or engineering team.</p>
 
         <div style="margin-top: clamp(40px, 5vw, 60px); display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: clamp(14px, 1.8vw, 22px);">
           <div data-reveal style="background: var(--surface); border: 1px solid var(--line); border-radius: 3px; padding: 24px 22px;">
@@ -285,10 +351,10 @@
             <h3 style="margin: 14px 0 7px; font-size: 18px; font-weight: 700;">Image</h3>
             <p style="margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Results render as live imagery of the ground and its motion.</p>
           </div>
-          <div data-reveal data-reveal-delay="320" style="background: var(--ink); border: 1px solid var(--ink); border-radius: 3px; padding: 24px 22px;">
+          <div data-reveal data-reveal-delay="320" style="background: #2b3139; border: 1px solid #2b3139; border-radius: 3px; padding: 24px 22px;">
             <div style="font-size: 11px; letter-spacing: 0.12em; color: var(--accent);">STEP 05</div>
             <h3 style="margin: 14px 0 7px; font-size: 18px; font-weight: 700; color: var(--bg);">Decide</h3>
-            <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #9aa0a8;">A traceable alert or assessment, with the evidence attached.</p>
+            <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #c8ced6;">A traceable alert or assessment, with the evidence attached.</p>
           </div>
         </div>
 
@@ -299,44 +365,49 @@
           </div>
           <div style="flex: 1 1 200px; min-width: 180px;">
             <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">Uncertainty-quantified</div>
-            <p style="margin: 9px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Confidence travels with the answer — never a number without a margin.</p>
+            <p style="margin: 9px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Confidence travels with the answer, never a number without a margin.</p>
           </div>
           <div style="flex: 1 1 200px; min-width: 180px;">
             <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">Robust to noise</div>
-            <p style="margin: 9px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Built for real field conditions — gaps, drift, and bad sensors included.</p>
+            <p style="margin: 9px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Built for real field conditions with gaps, drift, and bad sensors included.</p>
           </div>
           <div style="flex: 1 1 200px; min-width: 180px;">
             <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">Continuously evaluated</div>
-            <p style="margin: 9px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Evaluations are a core principle, not an afterthought — we measure what we ship.</p>
+            <p style="margin: 9px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Evaluations are a core principle, not an afterthought. We measure what we ship.</p>
           </div>
         </div>
 
-        <p data-reveal style="margin: clamp(30px, 3vw, 44px) 0 0; max-width: 46em; font-size: clamp(16px, 1.5vw, 20px); line-height: 1.55; color: var(--ink); font-weight: 500;">AI is the instrument here, not the decision-maker. We build augmented intelligence — the human expert stays at the center while the machine carries deep geophysical reasoning to them, in language they can act on. It lowers the barrier between the science and the call, and re-skills teams instead of black-boxing them.</p>
+        <p data-reveal style="margin: clamp(30px, 3vw, 44px) 0 0; max-width: 46em; font-size: clamp(16px, 1.5vw, 20px); line-height: 1.55; color: var(--ink); font-weight: 500;">AI is the instrument, not the decision-maker. We build augmented intelligence. The human expert stays at the center while the machine carries deep geophysical reasoning in language people can act on. It lowers the barrier between science and the call and helps reskill teams instead of black-boxing them.</p>
       </div>
     </section>
 
     <section id="industries" style="padding: clamp(56px, 8vw, 116px) clamp(20px, 5vw, 72px);">
       <div style="max-width: 1240px; margin: 0 auto;">
-        <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">05 / Industries</div>
+        <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">05 / What we can do today</div>
         <h2 data-reveal style="margin: 18px 0 0; max-width: 18em; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800;">Where the landscape and big infrastructure meet.</h2>
-        <p data-reveal style="margin: 22px 0 0; max-width: 38em; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: var(--muted);">We work with operators whose assets sit on ground that moves — where understanding the Earth is a safety, cost, and climate-risk question all at once.</p>
+        <p data-reveal style="margin: 22px 0 0; max-width: 38em; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: var(--muted);">We work with operators whose assets sit on moving ground. Understanding the Earth is a safety, cost, and climate risk question all at once.</p>
 
         <div style="margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: clamp(16px, 2vw, 24px);">
           <div data-reveal style="border: 1px solid var(--line); border-radius: 3px; overflow: hidden;">
-            <div style="aspect-ratio: 3/2; position: relative; background: repeating-linear-gradient(160deg, var(--surface-2) 0 12px, var(--surface) 12px 24px);">
-              <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 38%; background: var(--ink); opacity: 0.12; clip-path: polygon(0 100%, 0 60%, 18% 35%, 38% 62%, 60% 22%, 82% 55%, 100% 30%, 100% 100%);"></div>
+            <div style="aspect-ratio: 3/2; position: relative; background: var(--surface-2);">
+              <img src="https://images.pexels.com/photos/33263124/pexels-photo-33263124.jpeg?auto=compress&cs=tinysrgb&w=1400&h=900&fit=crop" alt="Dam and downstream river corridor used to represent tailings risk monitoring" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+              <div style="position: absolute; left: 10%; right: 12%; top: 64%; height: 2px; background: rgba(57, 211, 160, 0.9);"></div>
+              <div style="position: absolute; left: 10%; top: calc(64% - 5px); width: 10px; height: 10px; border-radius: 50%; background: rgba(57, 211, 160, 0.95); box-shadow: 0 0 0 4px rgba(57, 211, 160, 0.25);"></div>
+              <div style="position: absolute; left: 58%; top: calc(64% - 5px); width: 10px; height: 10px; border-radius: 50%; background: rgba(78, 161, 255, 0.95); box-shadow: 0 0 0 4px rgba(78, 161, 255, 0.25);"></div>
+              <div style="position: absolute; right: 12%; top: calc(64% - 5px); width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.95); box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);"></div>
+              <div style="position: absolute; left: 12%; top: 68%; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.92);">Fiber route</div>
+              <div style="position: absolute; right: 10%; top: 68%; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.92);">Downstream community</div>
               <span style="position: absolute; top: 13px; left: 13px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--line); padding: 4px 7px;">site imagery</span>
             </div>
             <div style="padding: 24px 22px 26px;">
               <h3 style="margin: 0 0 8px; font-size: 19px; font-weight: 700;">Mining</h3>
-              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Slope stability, tailings dams, and subsidence — monitored from inside the ground, not just from the air.</p>
+              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Slope stability, tailings dams, and subsidence monitored from inside the ground, not just from the air.</p>
             </div>
           </div>
 
           <div data-reveal data-reveal-delay="80" style="border: 1px solid var(--line); border-radius: 3px; overflow: hidden;">
-            <div style="aspect-ratio: 3/2; position: relative; background: repeating-linear-gradient(160deg, var(--surface-2) 0 12px, var(--surface) 12px 24px);">
-              <div style="position: absolute; inset: 24px; border: 1px solid var(--accent); opacity: 0.5;"></div>
-              <div style="position: absolute; inset: 38px; border: 1px solid var(--accent); opacity: 0.3;"></div>
+            <div style="aspect-ratio: 3/2; position: relative; background: var(--surface-2);">
+              <img src="https://images.pexels.com/photos/21998628/pexels-photo-21998628.jpeg?auto=compress&cs=tinysrgb&w=1400&h=900&fit=crop" alt="Large technical infrastructure campus in a green agricultural landscape" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
               <span style="position: absolute; top: 13px; left: 13px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--line); padding: 4px 7px;">site imagery</span>
             </div>
             <div style="padding: 24px 22px 26px;">
@@ -346,11 +417,8 @@
           </div>
 
           <div data-reveal data-reveal-delay="160" style="border: 1px solid var(--line); border-radius: 3px; overflow: hidden;">
-            <div style="aspect-ratio: 3/2; position: relative; background: repeating-linear-gradient(160deg, var(--surface-2) 0 12px, var(--surface) 12px 24px);">
-              <div style="position: absolute; top: 50%; left: 10%; right: 10%; height: 2px; background: var(--data);"></div>
-              <div style="position: absolute; top: calc(50% - 14px); left: 10%; width: 2px; height: 30px; background: var(--ink); opacity: 0.4;"></div>
-              <div style="position: absolute; top: calc(50% - 14px); left: 50%; width: 2px; height: 30px; background: var(--ink); opacity: 0.4;"></div>
-              <div style="position: absolute; top: calc(50% - 14px); right: 10%; width: 2px; height: 30px; background: var(--ink); opacity: 0.4;"></div>
+            <div style="aspect-ratio: 3/2; position: relative; background: var(--surface-2);">
+              <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1400&q=80" alt="Power transmission infrastructure" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
               <span style="position: absolute; top: 13px; left: 13px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--line); padding: 4px 7px;">site imagery</span>
             </div>
             <div style="padding: 24px 22px 26px;">
@@ -360,8 +428,8 @@
           </div>
 
           <div data-reveal data-reveal-delay="240" style="border: 1px solid var(--line); border-radius: 3px; overflow: hidden;">
-            <div style="aspect-ratio: 3/2; position: relative; background: repeating-linear-gradient(160deg, var(--surface-2) 0 12px, var(--surface) 12px 24px);">
-              <div style="position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 20px 20px; opacity: 0.7;"></div>
+            <div style="aspect-ratio: 3/2; position: relative; background: var(--surface-2);">
+              <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1400&q=80" alt="Urban skyline representing climate risk planning" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
               <span style="position: absolute; top: 13px; left: 13px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--line); padding: 4px 7px;">site imagery</span>
             </div>
             <div style="padding: 24px 22px 26px;">
@@ -373,14 +441,15 @@
       </div>
     </section>
 
-    <section id="showcase" style="background: var(--ink); padding: clamp(56px, 8vw, 116px) clamp(20px, 5vw, 72px);">
+    <!-- Temporary launch choice: keep showcase markup in source but hide until dashboard is production-ready. -->
+    <section id="showcase" style="display: none; background: var(--ink); padding: clamp(56px, 8vw, 116px) clamp(20px, 5vw, 72px);">
       <div style="max-width: 1240px; margin: 0 auto;">
         <div style="display: flex; flex-wrap: wrap; gap: clamp(28px, 4vw, 56px); align-items: flex-end; margin-bottom: clamp(32px, 4vw, 48px);">
           <div style="flex: 1 1 420px; min-width: 280px;">
             <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent);">06 / MVP demo</div>
-            <h2 data-reveal style="margin: 18px 0 0; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800; color: var(--bg); text-wrap: balance;">A working dashboard — this summer.</h2>
+            <h2 data-reveal style="margin: 18px 0 0; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800; color: var(--bg); text-wrap: balance;">A working dashboard this summer.</h2>
           </div>
-          <p data-reveal style="flex: 1 1 300px; min-width: 260px; margin: 0; font-size: clamp(15px, 1.4vw, 18px); line-height: 1.6; color: #9aa0a8;">Our first proof of concept goes live this summer: a running dashboard that ingests synthetic data, assimilates it against the physics, and images ground motion in real time — the same loop our production system will run on live sensor feeds.</p>
+          <p data-reveal style="flex: 1 1 300px; min-width: 260px; margin: 0; font-size: clamp(15px, 1.4vw, 18px); line-height: 1.6; color: #9aa0a8;">Our first proof of concept goes live this summer: a running dashboard that ingests synthetic data, assimilates it against the physics, and images ground motion in real time, the same loop our production system will run on live sensor feeds.</p>
         </div>
 
         <div data-reveal style="position: relative; aspect-ratio: 21/9; border: 1px solid rgba(255, 255, 255, 0.13); border-radius: 3px; overflow: hidden; background: repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.04) 0 14px, transparent 14px 28px), #15181d;">
@@ -391,7 +460,7 @@
           <div style="position: absolute; left: 68%; top: 64%; width: 13px; height: 13px; border-radius: 50%; background: #39d3a0; box-shadow: 0 0 0 6px rgba(57, 211, 160, 0.25);"></div>
           <div style="position: absolute; top: 18px; left: 18px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #9aa0a8; border: 1px solid rgba(255, 255, 255, 0.13); padding: 5px 9px;">MVP · SYNTHETIC DATA</div>
           <div style="position: absolute; bottom: 18px; left: 18px; right: 18px; display: flex; justify-content: space-between; gap: 12px; font-size: 11px; color: #9aa0a8;">
-            <span>PROOF OF CONCEPT — dV/V velocity-change map</span>
+            <span>PROOF OF CONCEPT dV/V velocity-change map</span>
             <span>SUMMER 2026</span>
           </div>
         </div>
@@ -401,12 +470,12 @@
     <section id="team" style="border-top: 1px solid var(--line); padding: clamp(56px, 8vw, 116px) clamp(20px, 5vw, 72px);">
       <div style="max-width: 1240px; margin: 0 auto;">
         <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">07 / Team</div>
-        <h2 data-reveal style="margin: 18px 0 0; max-width: 16em; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800;">Geophysicists who build the instruments.</h2>
+        <h2 data-reveal style="margin: 18px 0 0; max-width: 16em; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800;">Team</h2>
         <p data-reveal style="margin: 22px 0 0; max-width: 36em; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: var(--muted);">AEI was founded out of the University of Washington's FiberLab, where the science behind this platform is still being written.</p>
 
         <div style="margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: clamp(28px, 3.5vw, 48px);">
           <div data-reveal style="display: flex; flex-direction: column; gap: 16px;">
-            <img src="https://i.postimg.cc/m28cRVgV/so.jpg" alt="Stephanie Olinger" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 4px; background: var(--surface-2);" />
+            <img src="assets/portraits/stephanie-olinger.jpg" alt="Stephanie Olinger" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center 22%; border-radius: 4px; background: var(--surface-2);" />
             <div>
               <h3 style="margin: 0 0 4px; font-size: 19px; font-weight: 700; letter-spacing: -0.01em;">Stephanie Olinger, PhD</h3>
               <div style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px;">Cofounder · Operations Lead</div>
@@ -522,156 +591,290 @@
           });
         }
 
-        /* ---------- Hero canvas: live sensor field ---------- */
-        var canvas = document.getElementById("heroCanvas");
-        if (!canvas) return;
-        var ctx = canvas.getContext("2d");
-        var dpr = Math.min(window.devicePixelRatio || 1, 2);
-        var W = 0,
-          H = 0;
+        /* ---------- Hero cinematic video + geophysical overlay ---------- */
+        var hero = document.getElementById("hero");
+        var video = document.getElementById("heroVideo");
+        var segmentStart = 0;
+        var segmentDuration = 15;
+        var overlay = document.getElementById("geoOverlay");
+        if (!overlay) return;
+        var ctx = overlay.getContext("2d");
+        var W = 0;
+        var H = 0;
+        var dpr = Math.min(2, window.devicePixelRatio || 1);
+        var lowPower =
+          (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
+          (navigator.connection && navigator.connection.saveData);
+        var targetFps = lowPower ? 24 : 36;
+        var frameInterval = 1000 / targetFps;
+        var lastFrameAt = 0;
+        var rafId = 0;
+        var overlayActive = false;
+        var heroInView = true;
+        var motionEnabled = !reduce;
 
-        function resize() {
-          W = canvas.clientWidth || canvas.parentNode.clientWidth;
-          H = canvas.clientHeight || canvas.parentNode.clientHeight;
-          canvas.width = W * dpr;
-          canvas.height = H * dpr;
+        var sensors = [
+          [0.13, 0.67], [0.22, 0.72], [0.34, 0.66], [0.48, 0.7],
+          [0.61, 0.63], [0.76, 0.69], [0.87, 0.61], [0.18, 0.81],
+          [0.39, 0.84], [0.58, 0.8], [0.72, 0.83]
+        ];
+
+        var agentPaths = [
+          { a: 0, b: 3, offset: 0.0 },
+          { a: 2, b: 6, offset: 0.22 },
+          { a: 7, b: 10, offset: 0.45 },
+          { a: 1, b: 8, offset: 0.68 }
+        ];
+
+        function resizeOverlay() {
+          W = overlay.clientWidth;
+          H = overlay.clientHeight;
+          dpr = Math.min(2, window.devicePixelRatio || 1);
+          overlay.width = Math.floor(W * dpr);
+          overlay.height = Math.floor(H * dpr);
           ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         }
-        resize();
-        window.addEventListener("resize", resize);
 
-        var nodesN = [
-          [0.14, 0.3], [0.28, 0.64], [0.45, 0.42], [0.57, 0.74],
-          [0.69, 0.27], [0.82, 0.56], [0.92, 0.4]
-        ];
-        var links = [
-          [0, 2], [1, 2], [2, 3], [2, 4], [4, 5], [3, 5], [5, 6], [1, 3]
-        ];
-        var hazards = [
-          "Sensing geohazards", "Flood monitoring", "Tailings dam stability",
-          "Ground subsidence", "Infrastructure strain"
-        ];
-        var nodes = nodesN.map(function () {
-          return { pulse: 0 };
-        });
-        var hazLabel = document.getElementById("hazLabel");
-        var liveDot = document.getElementById("liveDot");
-        var N = 220;
-        var seis = new Float32Array(N);
-        var sv = 0;
-        var t = 0,
-          lastHaz = -1;
-
-        function draw() {
-          if (canvas.clientWidth !== W || canvas.clientHeight !== H) resize();
-          t += 1;
-          ctx.clearRect(0, 0, W, H);
-
-          for (var l = 0; l < 5; l++) {
-            var baseY = H * (0.3 + l * 0.13);
-            var amp = 16 + l * 7;
-            var ph = t * 0.004 * (1 + l * 0.2) + l * 1.3;
-            ctx.beginPath();
-            for (var x = 0; x <= W; x += 14) {
-              var y =
-                baseY +
-                Math.sin(x * 0.006 + ph) * amp +
-                Math.sin(x * 0.013 + ph * 1.7) * amp * 0.4;
-              x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-            }
-            ctx.strokeStyle =
-              l === 2 ? "rgba(47,214,166,0.20)" : "rgba(130,160,180,0.09)";
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
-
-          var sweep = ((t * 0.9) % (W + 200)) - 100;
-          var grd = ctx.createLinearGradient(sweep - 60, 0, sweep + 60, 0);
-          grd.addColorStop(0, "rgba(78,161,255,0)");
-          grd.addColorStop(0.5, "rgba(78,161,255,0.09)");
-          grd.addColorStop(1, "rgba(78,161,255,0)");
-          ctx.fillStyle = grd;
-          ctx.fillRect(sweep - 60, 0, 120, H);
-          ctx.fillStyle = "rgba(78,161,255,0.45)";
-          ctx.fillRect(sweep, 0, 1, H);
-
-          var px = nodesN.map(function (n) {
-            return [n[0] * W, n[1] * H];
-          });
-          links.forEach(function (lk, i) {
-            var a = px[lk[0]],
-              b = px[lk[1]];
-            ctx.beginPath();
-            ctx.moveTo(a[0], a[1]);
-            ctx.lineTo(b[0], b[1]);
-            ctx.strokeStyle = "rgba(130,165,185,0.15)";
-            ctx.lineWidth = 1;
-            ctx.stroke();
-            var tt = (t * 0.006 + i * 0.13) % 1;
-            var dx = a[0] + (b[0] - a[0]) * tt,
-              dy = a[1] + (b[1] - a[1]) * tt;
-            ctx.beginPath();
-            ctx.arc(dx, dy, 1.8, 0, 7);
-            ctx.fillStyle = "rgba(47,214,166,0.85)";
-            ctx.fill();
-          });
-
-          px.forEach(function (p, i) {
-            var nd = nodes[i];
-            if (Math.abs(p[0] - sweep) < 3) nd.pulse = 1;
-            if (nd.pulse > 0) {
-              var r = (1 - nd.pulse) * 46 + 6;
-              ctx.beginPath();
-              ctx.arc(p[0], p[1], r, 0, 7);
-              ctx.strokeStyle = "rgba(47,214,166," + nd.pulse * 0.5 + ")";
-              ctx.lineWidth = 1.5;
-              ctx.stroke();
-              nd.pulse -= 0.012;
-              if (nd.pulse < 0) nd.pulse = 0;
-            }
-            ctx.beginPath();
-            ctx.arc(p[0], p[1], 3.2, 0, 7);
-            ctx.fillStyle = i % 2 ? "#4ea1ff" : "#2fd6a6";
-            ctx.fill();
-            ctx.beginPath();
-            ctx.arc(p[0], p[1], 6.5, 0, 7);
-            ctx.strokeStyle = "rgba(255,255,255,0.18)";
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          });
-
-          if (t % 2 === 0) {
-            sv += (Math.random() - 0.5) * 0.6;
-            sv *= 0.92;
-            for (var k = 0; k < N - 1; k++) seis[k] = seis[k + 1];
-            seis[N - 1] =
-              sv + (Math.random() < 0.02 ? (Math.random() - 0.5) * 4 : 0);
-          }
-          var sy = H * 0.9;
+        function line(x1, y1, x2, y2, alpha, width) {
+          ctx.strokeStyle = "rgba(128,245,255," + alpha + ")";
+          ctx.lineWidth = width || 1;
           ctx.beginPath();
-          for (var m = 0; m < N; m++) {
-            var xx = (m / (N - 1)) * W;
-            var yy = sy + seis[m] * 16;
-            m === 0 ? ctx.moveTo(xx, yy) : ctx.lineTo(xx, yy);
-          }
-          ctx.strokeStyle = "rgba(47,214,166,0.45)";
-          ctx.lineWidth = 1.2;
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
           ctx.stroke();
-
-          var hi = Math.floor(t / 150) % hazards.length;
-          if (hi !== lastHaz && hazLabel) {
-            lastHaz = hi;
-            hazLabel.textContent = hazards[hi];
-          }
-          if (liveDot) {
-            var o = 0.5 + 0.5 * Math.sin(t * 0.12);
-            liveDot.style.boxShadow =
-              "0 0 0 " + o * 5 + "px rgba(57,211,160," + (0.5 - o * 0.4) + ")";
-          }
-
-          if (!reduce) requestAnimationFrame(draw);
         }
-        draw();
+
+        function dot(x, y, r, alpha) {
+          var g = ctx.createRadialGradient(x, y, 0, x, y, r * 6);
+          g.addColorStop(0, "rgba(148,248,255," + alpha + ")");
+          g.addColorStop(0.22, "rgba(96,220,255," + alpha * 0.35 + ")");
+          g.addColorStop(1, "rgba(96,220,255,0)");
+          ctx.fillStyle = g;
+          ctx.beginPath();
+          ctx.arc(x, y, r * 6, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = "rgba(220,255,255," + Math.min(1, alpha + 0.2) + ")";
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        function bezier(p0, p1, p2, p3, t) {
+          var u = 1 - t;
+          return [
+            u * u * u * p0[0] + 3 * u * u * t * p1[0] + 3 * u * t * t * p2[0] + t * t * t * p3[0],
+            u * u * u * p0[1] + 3 * u * u * t * p1[1] + 3 * u * t * t * p2[1] + t * t * t * p3[1]
+          ];
+        }
+
+        function drawContours(time) {
+          ctx.save();
+          ctx.globalAlpha = 0.22;
+          ctx.lineWidth = 1;
+          for (var j = 0; j < 8; j++) {
+            var yBase = H * (0.72 + j * 0.035);
+            ctx.strokeStyle = "rgba(118,236,255," + (0.2 - j * 0.012) + ")";
+            ctx.beginPath();
+            for (var i = 0; i <= 120; i++) {
+              var x = W * (i / 120);
+              var y = yBase + Math.sin(i * 0.12 + time * 0.55 + j * 0.8) * (6 + j * 1.4) + Math.sin(i * 0.035 + j) * 9;
+              if (i === 0) ctx.moveTo(x, y);
+              else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+          }
+          ctx.restore();
+        }
+
+        function drawWireTerrain(time) {
+          ctx.save();
+          ctx.globalAlpha = 0.14;
+          ctx.strokeStyle = "rgba(128,245,255,0.55)";
+          ctx.lineWidth = 1;
+          var baseY = H * 0.74;
+          var rows = 6;
+          for (var r = 0; r < rows; r++) {
+            ctx.beginPath();
+            for (var i = 0; i <= 80; i++) {
+              var x = W * (i / 80);
+              var y = baseY + r * H * 0.035 + Math.sin(i * 0.18 + r * 0.7 + time * 0.2) * 4;
+              if (i === 0) ctx.moveTo(x, y);
+              else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+          }
+          for (var c = 0; c < 18; c++) {
+            var x2 = W * (0.05 + c * 0.055);
+            line(x2, baseY - 16, x2 + Math.sin(c) * 24, H * 0.92, 0.08, 1);
+          }
+          ctx.restore();
+        }
+
+        function drawRiskFields(time) {
+          ctx.save();
+          var cx = W * 0.76;
+          var cy = H * 0.55;
+          for (var k = 0; k < 5; k++) {
+            ctx.strokeStyle = "rgba(140,246,255," + (0.09 + k * 0.018) + ")";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.ellipse(cx + k * 12, cy + k * 8, 70 + k * 18, 18 + k * 5, -0.22, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+          var gx = W * 0.49;
+          var gy = H * 0.77;
+          for (var k2 = 0; k2 < 4; k2++) {
+            ctx.strokeStyle = "rgba(88,185,255," + (0.11 + 0.02 * Math.sin(time + k2)) + ")";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.ellipse(gx, gy + k2 * 13, 120 + k2 * 30, 22 + k2 * 4, 0.08, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+          ctx.restore();
+        }
+
+        function drawNetwork(time) {
+          var pts = sensors.map(function (s) {
+            return [s[0] * W, s[1] * H];
+          });
+          ctx.save();
+          ctx.globalAlpha = 0.65;
+          var pairs = [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [7, 8], [8, 9], [9, 10], [0, 7], [2, 8], [4, 9], [6, 10], [1, 3], [3, 5], [5, 10]];
+          pairs.forEach(function (pair, idx) {
+            var pulse = 0.07 + 0.06 * (Math.sin(time * 1.2 + idx * 0.9) + 1) / 2;
+            line(pts[pair[0]][0], pts[pair[0]][1], pts[pair[1]][0], pts[pair[1]][1], pulse, 1);
+          });
+          pts.forEach(function (p, idx) {
+            dot(p[0], p[1], 2.1 + (idx % 3) * 0.35, 0.5 + 0.22 * Math.sin(time * 1.7 + idx));
+          });
+          ctx.restore();
+        }
+
+        function drawAgents(time) {
+          var pts = sensors.map(function (s) {
+            return [s[0] * W, s[1] * H];
+          });
+          ctx.save();
+          agentPaths.forEach(function (path, idx) {
+            var p0 = pts[path.a];
+            var p3 = pts[path.b];
+            var midY = Math.min(p0[1], p3[1]) - H * (0.09 + 0.025 * idx);
+            var p1 = [p0[0] + (p3[0] - p0[0]) * 0.28, midY];
+            var p2 = [p0[0] + (p3[0] - p0[0]) * 0.72, midY + Math.sin(idx) * H * 0.03];
+            var u = (time / segmentDuration + path.offset) % 1;
+            var pos = bezier(p0, p1, p2, p3, u);
+            ctx.strokeStyle = "rgba(128,245,255,0.10)";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (var s = 0; s <= 30; s++) {
+              var p = bezier(p0, p1, p2, p3, s / 30);
+              if (s === 0) ctx.moveTo(p[0], p[1]);
+              else ctx.lineTo(p[0], p[1]);
+            }
+            ctx.stroke();
+            dot(pos[0], pos[1], 2.7, 0.78);
+          });
+          ctx.restore();
+        }
+
+        function renderOverlay(now) {
+          if (!overlayActive) return;
+          if (now - lastFrameAt < frameInterval) {
+            rafId = requestAnimationFrame(renderOverlay);
+            return;
+          }
+          lastFrameAt = now;
+          var time = (now / 1000) % segmentDuration;
+          ctx.clearRect(0, 0, W, H);
+          drawContours(time);
+          drawWireTerrain(time);
+          drawRiskFields(time);
+          drawNetwork(time);
+          drawAgents(time);
+          rafId = requestAnimationFrame(renderOverlay);
+        }
+
+        function renderStaticOverlay() {
+          ctx.clearRect(0, 0, W, H);
+          drawContours(0);
+          drawWireTerrain(0);
+          drawRiskFields(0);
+          drawNetwork(0);
+          drawAgents(0);
+        }
+
+        function stopOverlayLoop() {
+          overlayActive = false;
+          if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = 0;
+          }
+        }
+
+        function startOverlayLoop() {
+          if (!motionEnabled || overlayActive) return;
+          overlayActive = true;
+          rafId = requestAnimationFrame(renderOverlay);
+        }
+
+        function syncHeroMotionState() {
+          var shouldAnimate = motionEnabled && !document.hidden && heroInView;
+          if (video) {
+            if (shouldAnimate) {
+              video.play().catch(function () {});
+            } else {
+              video.pause();
+            }
+          }
+          if (shouldAnimate) {
+            startOverlayLoop();
+          } else {
+            stopOverlayLoop();
+          }
+        }
+
+        if (video) {
+          video.addEventListener("loadedmetadata", function () {
+            video.currentTime = segmentStart;
+            syncHeroMotionState();
+          });
+          video.addEventListener("timeupdate", function () {
+            if (video.currentTime >= segmentStart + segmentDuration) {
+              video.currentTime = segmentStart + 0.02;
+              if (motionEnabled && !document.hidden && heroInView) {
+                video.play().catch(function () {});
+              }
+            }
+          });
+        }
+
+        if (hero && "IntersectionObserver" in window) {
+          var heroObserver = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                heroInView = entry.isIntersecting;
+              });
+              syncHeroMotionState();
+            },
+            { threshold: 0.05 }
+          );
+          heroObserver.observe(hero);
+        }
+
+        document.addEventListener("visibilitychange", syncHeroMotionState, {
+          passive: true
+        });
+
+        if (reduce) {
+          if (video) video.pause();
+          renderStaticOverlay();
+        }
+
+        resizeOverlay();
+        window.addEventListener("resize", resizeOverlay, { passive: true });
+        if (!reduce) {
+          syncHeroMotionState();
+        }
       })();
     </script>
   </body>

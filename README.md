@@ -1,6 +1,6 @@
 # Applied Environmental Intelligence (AEI) Website
 
-[![Build and Deploy](https://github.com/marinedenolle/AEI-website/actions/workflows/pages.yml/badge.svg)](https://github.com/marinedenolle/AEI-website/actions/workflows/pages.yml)
+[![Build and Deploy](https://github.com/applied-environmental-intelligence/AEI-website/actions/workflows/pages.yml/badge.svg)](https://github.com/applied-environmental-intelligence/AEI-website/actions/workflows/pages.yml)
 
 A modern, lightweight website for Applied Environmental Intelligence showcasing subsurface monitoring and wire theft detection using fiber optic networks.
 
@@ -15,7 +15,7 @@ A modern, lightweight website for Applied Environmental Intelligence showcasing 
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/marinedenolle/AEI-website.git
+   git clone https://github.com/applied-environmental-intelligence/AEI-website.git
    cd AEI-website
    ```
 
@@ -211,7 +211,7 @@ The HTML uses **relative paths** for all animations and assets:
 
 These relative paths work correctly in both contexts:
 - **Local preview**: `http://localhost:8000/animations/cable_animation.gif`
-- **GitHub Pages**: `https://marinedenolle.github.io/AEI-website/animations/cable_animation.gif`
+- **GitHub Pages**: `https://applied-environmental-intelligence.github.io/AEI-website/animations/cable_animation.gif`
 
 No path changes are needed when deploying - the build process handles everything automatically!
 ### Initial Setup (One-Time)
@@ -224,7 +224,7 @@ No path changes are needed when deploying - the build process handles everything
 
 Your site will be available at:
 ```
-https://applied-environment-intelligence.github.io/AEI-website/
+https://applied-environmental-intelligence.github.io/AEI-website/
 ```
 
 ### Manual Deployment

@@ -39,6 +39,7 @@
       html {
         scroll-behavior: smooth;
         scroll-padding-top: 86px;
+        -webkit-text-size-adjust: 100%;
       }
       body {
         margin: 0;
@@ -47,6 +48,7 @@
         color: var(--ink);
         font-family: Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
         overflow-x: hidden;
       }
 
@@ -132,18 +134,50 @@
         pointer-events: none;
       }
 
+      @supports not (mix-blend-mode: screen) {
+        #geoOverlay {
+          mix-blend-mode: normal;
+          opacity: 0.32;
+        }
+      }
+
+      @media (max-width: 980px) {
+        .site-header {
+          flex-wrap: wrap;
+          row-gap: 10px;
+        }
+
+        .floating-nav {
+          width: 100%;
+          justify-content: flex-end;
+          flex-wrap: wrap;
+        }
+      }
+
       @media (max-width: 1120px) {
         .brand-sub {
           display: none;
         }
       }
       @media (max-width: 720px) {
+        .site-header {
+          padding: 12px 14px !important;
+        }
+
         .floating-nav {
           gap: 14px !important;
+          justify-content: space-between;
         }
+
         .nav-hide-sm {
           display: none;
         }
+
+        .nav-cta {
+          padding: 8px 12px !important;
+          font-size: 13px !important;
+        }
+
         .hero-video {
           transform: scale(1.08);
         }
@@ -161,6 +195,7 @@
 
   <body id="top">
     <header
+      class="site-header"
       style="position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 15px clamp(20px, 5vw, 72px); background: var(--bg); border-bottom: 1px solid var(--line);"
     >
       <a href="#top" style="display: flex; align-items: baseline; gap: 11px; text-decoration: none; color: inherit;">
@@ -174,7 +209,7 @@
         <a class="navlink nav-hide-sm" href="#how">Pipeline</a>
         <a class="navlink" href="#industries">Industries</a>
         <a class="navlink" href="#team">Team</a>
-        <a href="#contact" style="background: var(--accent); color: var(--accent-ink); padding: 9px 16px; border-radius: 2px; font-size: 14px; font-weight: 600; text-decoration: none;">Request a demo</a>
+        <a class="nav-cta" href="#contact" style="background: var(--accent); color: var(--accent-ink); padding: 9px 16px; border-radius: 2px; font-size: 14px; font-weight: 600; text-decoration: none;">Request a demo</a>
       </nav>
     </header>
 

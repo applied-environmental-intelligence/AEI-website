@@ -4,10 +4,9 @@ Build script for AEI Website.
 
 This script:
 1. Cleans and creates the dist/ directory
-2. Copies static assets from src/ to dist/
-3. Generates animation assets using Python scripts
-4. Validates all outputs exist
-5. Exits non-zero on failure
+2. Copies static assets from docs/ to dist/
+3. Validates all expected outputs exist
+4. Exits non-zero on failure
 
 Usage:
     python build.py
@@ -20,7 +19,6 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.resolve()
 SRC_DIR = PROJECT_ROOT / "docs"
 DIST_DIR = PROJECT_ROOT / "dist"
-SCRIPTS_DIR = PROJECT_ROOT / "scripts"
 
 
 def clean_dist():
@@ -44,13 +42,19 @@ def copy_static_assets():
     else:
         print(f"  ✗ Warning: {src_html} not found", file=sys.stderr)
 
-    # Copy nested assets used by the page (videos, images, JS, source files)
+    # Copy nested assets used by the page (videos, images, JS)
+    # Exclude assets/source/ — it holds build inputs, not web assets.
     src_assets = SRC_DIR / "assets"
     if src_assets.exists():
-        shutil.copytree(src_assets, DIST_DIR / "assets", dirs_exist_ok=True)
+        shutil.copytree(
+            src_assets,
+            DIST_DIR / "assets",
+            dirs_exist_ok=True,
+            ignore=shutil.ignore_patterns("source"),
+        )
         print("  ✓ Copied assets/ directory")
-    
-    # Copy other top-level assets if they exist (future-proofing)
+
+    # Copy other top-level asset directories if they exist (future-proofing)
     for item in ["css", "js", "images", "fonts"]:
         src_item = SRC_DIR / item
         if src_item.exists():

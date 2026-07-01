@@ -1,6 +1,6 @@
 # Applied Environmental Intelligence (AEI) Website
 
-[![Build and Deploy](https://github.com/marinedenolle/AEI-website/actions/workflows/pages.yml/badge.svg)](https://github.com/marinedenolle/AEI-website/actions/workflows/pages.yml)
+[![Build and Deploy](https://github.com/applied-environmental-intelligence/AEI-website/actions/workflows/pages.yml/badge.svg)](https://github.com/applied-environmental-intelligence/AEI-website/actions/workflows/pages.yml)
 
 A modern, lightweight website for Applied Environmental Intelligence showcasing subsurface monitoring and wire theft detection using fiber optic networks.
 
@@ -15,7 +15,7 @@ A modern, lightweight website for Applied Environmental Intelligence showcasing 
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/marinedenolle/AEI-website.git
+   git clone https://github.com/applied-environmental-intelligence/AEI-website.git
    cd AEI-website
    ```
 
@@ -23,44 +23,34 @@ A modern, lightweight website for Applied Environmental Intelligence showcasing 
 
    **Option A: Using Mamba/Conda (Recommended)**
    ```bash
-   # Create environment from environment.yml
    mamba env create -f environment.yml
-   
-   # Activate the environment
    mamba activate aei-website
    ```
-   
+
    See [docs/MAMBA_GUIDE.md](docs/MAMBA_GUIDE.md) for detailed mamba/conda instructions.
 
-   **Option B: Using venv + pip**
+   **Option B: Using venv (no extra packages needed)**
    ```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -r scripts/requirements.txt
    ```
 
-3. **Add the subsurface source image** (required for reveal animation)
-   
-   **Option A: Use your own image**
-   - Place your `subsurface.png` file in `docs/assets/source/`
-   
-   **Option B: Create a test placeholder**
-   ```bash
-   python scripts/create_placeholder.py
-   ```
-   
-   See [docs/assets/source/README.md](docs/assets/source/README.md) for more details.
+   The build script only uses Python's standard library (`shutil`, `pathlib`) — no `pip install` step is required.
 
-4. **Build the site**
+3. **Build the site**
    ```bash
    python build.py
    ```
 
-5. **Preview locally**
+   The build script copies all static assets from `docs/` to `dist/`. All sections of the front page depend on assets in `docs/assets/` — the hero video, capability images, team portraits, and JavaScript are all copied automatically. `build.py` handles this in one step.
+
+4. **Preview locally**
    ```bash
    python -m http.server --directory dist 8000
    ```
-   Open [http://localhost:8000](http://localhost:8000) in your browser
+   Open [http://localhost:8000](http://localhost:8000) in your browser.
+
+   > **Important**: always serve from `dist/` via a local HTTP server. Opening `dist/index.html` directly with `file://` will block the hero video and some assets due to browser security restrictions.
 
 ## 📁 Repository Structure
 
@@ -69,245 +59,136 @@ AEI-website/
 ├── .github/
 │   └── workflows/
 │       └── pages.yml          # GitHub Actions workflow for automated deployment
-├── docs/                      # Source files (edit these)
-│   ├── index.html            # Main HTML page
+├── docs/                      # Source files (edit these, never edit dist/)
+│   ├── index.html             # Main HTML page
 │   ├── assets/
-│   │   └── source/
-│   │       ├── README.md      # Instructions for source assets
-│   │       └── subsurface.png # Source image for reveal animation (add this!)
-│   ├── CONTRIBUTING.md       # Contribution guidelines
-│   ├── MAMBA_GUIDE.md        # Mamba/Conda guide
-│   └── UPDATE_GUIDE.md       # Guide for updating content
-├── scripts/                   # Build scripts
-│   ├── generate_cable_animation.py
-│   ├── generate_reveal_subsurface.py
-│   └── requirements.txt       # Python dependencies (pip)
-├── dist/                      # Build output (generated, do not edit!)
-│   ├── index.html            # Compiled HTML
-│   └── animations/           # Generated animation assets
-│       ├── cable_animation.gif
-│       └── subsurface_reveal.gif
+│   │   ├── capabilities/      # Capability section images
+│   │   ├── industries/        # Industry card photos
+│   │   ├── js/
+│   │   │   └── home.js        # Scroll-reveal and hero canvas animation
+│   │   ├── portraits/         # Team portrait photos
+│   │   ├── videos/
+│   │   │   └── hero-loop.mp4  # Background video for the hero section
+│   │   └── source/            # Build inputs — NOT copied to dist/
+│   │       └── subsurface.png # Source image (kept for future use)
+│   ├── CONTRIBUTING.md
+│   ├── MAMBA_GUIDE.md
+│   └── UPDATE_GUIDE.md
+├── dist/                      # Build output (generated — do not edit!)
+│   ├── index.html
+│   └── assets/                # Copied from docs/assets/ (source/ excluded)
 ├── build.py                   # Build orchestration script
 ├── environment.yml            # Conda/Mamba environment specification
-├── .gitignore
-└── README.md                  # This file
+└── README.md
 ```
 
 ## 🔨 Build Process
 
-The build script (`build.py`) performs the following steps:
+`build.py` runs three steps:
 
-1. **Clean**: Removes and recreates `dist/` directory
-2. **Copy**: Copies static assets from `docs/` to `dist/`
-3. **Generate**: Runs Python scripts to create animation GIFs
-4. **Validate**: Checks that all expected outputs exist
+1. **Clean** — removes and recreates `dist/`
+2. **Copy** — copies `docs/index.html` and `docs/assets/` (excluding `assets/source/`) to `dist/`
+3. **Validate** — checks that `dist/index.html` exists
 
-### Build Commands
-
-```bash
-# Standard build
-python build.py
-
-# Build with custom Python
-python3.11 build.py
-```
-
-### Build Output
-
-- ✅ `dist/index.html` - Main page with relative asset paths
-- ✅ `dist/animations/cable_animation.gif` - 3D cable wireframe animation (~4s, 1920×1080)
-- ✅ `dist/animations/subsurface_reveal.gif` - Semi-circular wipe reveal (~2s, variable size)
-
-## � Generating Animations Directly
-
-You can run the animation scripts directly in the repository without doing a full build. This is useful for testing animation changes or generating GIFs for other purposes.
-
-### Generate Cable Animation
-
-```bash
-# Activate your environment first
-mamba activate aei-website  # or: source venv/bin/activate
-
-# Generate in current directory (default)
-python scripts/generate_cable_animation.py
-
-# Or specify custom output location
-python scripts/generate_cable_animation.py --output path/to/cable_animation.gif
-```
-
-This creates `cable_animation.gif` in the specified location (~2-4 MB, 1920×1080px, ~4 seconds).
-
-### Generate Subsurface Reveal Animation
-
-```bash
-# First, make sure you have the source image
-# Place your PNG in: docs/assets/source/subsurface.png
-# (See docs/assets/source/README.md for details)
-
-# Generate with default paths
-python scripts/generate_reveal_subsurface.py \
-  --input docs/assets/source/subsurface.png \
-  --output subsurface_reveal.gif
-
-# Or generate directly to dist/animations/
-python scripts/generate_reveal_subsurface.py \
-  --input docs/assets/source/subsurface.png \
-  --output dist/animations/subsurface_reveal.gif
-```
-
-### Quick Test: Generate Both Animations
-
-```bash
-# Activate environment
-mamba activate aei-website  # or: source venv/bin/activate
-
-# Create output directory
-mkdir -p test_animations
-
-# Generate cable animation
-python scripts/generate_cable_animation.py --output test_animations/cable.gif
-
-# Generate subsurface reveal (if you have the source image)
-python scripts/generate_reveal_subsurface.py \
-  --input docs/assets/source/subsurface.png \
-  --output test_animations/reveal.gif
-
-# View the results
-ls -lh test_animations/
-```
-
-### Animation Parameters
-
-Both scripts use hardcoded parameters for consistency. To modify:
-
-**Cable Animation** (`scripts/generate_cable_animation.py`):
-- Resolution: 1920×1080 (line 40: `W, H = 1920*2, 1080*2`)
-- Duration: 4 seconds (line 44: `duration_s = 4.0`)
-- Frame rate: 40 fps (line 43: `fps = 40`)
-- Colors: Light gray on dark gray (lines 170-171)
-
-**Subsurface Reveal** (`scripts/generate_reveal_subsurface.py`):
-- Resolution: Matches input PNG
-- Duration: 1.9 seconds (line 47: `duration_s = 1.9`)
-- Frame rate: 50 fps (line 46: `fps = 50`)
-- Background: `#111111` (line 10: `BG_RGBA`)
-
-After modifying parameters, rebuild the site to update deployed animations:
 ```bash
 python build.py
 ```
 
-## �🌐 GitHub Pages Deployment
+### What goes into dist/
 
-The site automatically deploys to GitHub Pages on every push to the `main` branch.
-### Asset Paths and URLs
+| Asset | Source | Notes |
+|---|---|---|
+| `index.html` | `docs/index.html` | Main page |
+| `assets/videos/hero-loop.mp4` | `docs/assets/videos/` | Hero background video |
+| `assets/js/home.js` | `docs/assets/js/` | Scroll-reveal & hero canvas |
+| `assets/capabilities/*.png` | `docs/assets/capabilities/` | Capability section images |
+| `assets/industries/*.jpg` | `docs/assets/industries/` | Industry card photos |
+| `assets/portraits/*.jpg` | `docs/assets/portraits/` | Team portraits |
 
-The HTML uses **relative paths** for all animations and assets:
+`docs/assets/source/` is intentionally excluded from `dist/` — it holds build inputs, not web assets.
+
+## 🌐 GitHub Pages Deployment
+
+The site automatically deploys to GitHub Pages on every push to `main`.
+
+### Asset paths
+
+All assets use **relative paths**, so they work identically in local preview and on GitHub Pages:
+
 ```html
-<!-- In docs/index.html -->
-<img src="animations/cable_animation.gif" />
-<img src="animations/subsurface_reveal.gif" />
+<img src="assets/capabilities/das-car-clean.png" />
+<video src="assets/videos/hero-loop.mp4"></video>
+<script src="assets/js/home.js"></script>
 ```
 
-These relative paths work correctly in both contexts:
-- **Local preview**: `http://localhost:8000/animations/cable_animation.gif`
-- **GitHub Pages**: `https://marinedenolle.github.io/AEI-website/animations/cable_animation.gif`
+### Initial setup (one-time)
 
-No path changes are needed when deploying - the build process handles everything automatically!
-### Initial Setup (One-Time)
-
-1. Go to **Settings** → **Pages** in your GitHub repository
+1. Go to **Settings → Pages** in your GitHub repository
 2. Under **Source**, select **GitHub Actions**
-3. The workflow will automatically build and deploy on the next push
+3. The workflow builds and deploys on the next push
 
 ### Deployment URL
 
-Your site will be available at:
 ```
-https://applied-environment-intelligence.github.io/AEI-website/
+https://applied-environmental-intelligence.github.io/AEI-website/
 ```
 
-### Manual Deployment
+### Manual deployment
 
-You can also trigger a deployment manually:
-1. Go to **Actions** tab in GitHub
+1. Go to the **Actions** tab
 2. Select "Build and Deploy to GitHub Pages"
 3. Click **Run workflow**
 
 ## 📝 Updating Content
 
-**Important**: Always edit files in `docs/`, never in `dist/`!
+Always edit files in `docs/`, never in `dist/`.
 
-- **Update HTML**: Edit [docs/index.html](docs/index.html)
-- **Add new pages**: Create new HTML files in `docs/` and update navigation
-- **Regenerate animations**: Modify scripts in `scripts/` and rebuild
-- **Add images**: Place in `docs/assets/` and reference with relative paths
-- **Embed LinkedIn posts**: Use Company Profile widget for automatic latest posts (see guide below)
-- **Embed YouTube videos**: Use iframe embed codes with responsive containers
+- **Update HTML**: edit [docs/index.html](docs/index.html)
+- **Add images**: place in the appropriate `docs/assets/` subdirectory and reference with a relative path
+- **Add pages**: create new HTML files in `docs/` and update navigation
 
-For detailed instructions including **automatic LinkedIn post embedding**, see [docs/UPDATE_GUIDE.md](docs/UPDATE_GUIDE.md).
-
-### Quick: Embed LinkedIn Posts (Automatic)
-
-**For automatic latest posts from your company page:**
-
-1. Add to `docs/index.html`:
-   ```html
-   <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-   <script type="IN/CompanyProfile" data-id="YOUR_COMPANY_ID" data-format="inline"></script>
-   ```
-2. Replace `YOUR_COMPANY_ID` with your LinkedIn company page ID
-3. Rebuild: `python build.py`
-
-**For specific individual posts:** Get embed code from LinkedIn post → ••• → "Embed"
-
-See [docs/UPDATE_GUIDE.md](docs/UPDATE_GUIDE.md#embed-linkedin-posts) for all options and styling.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please read [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines.
-
-## 📦 Dependencies
-
-### Python Packages (scripts/requirements.txt)
-- **Pillow** (≥10.0.0) - Image processing and GIF generation
-- **NumPy** (≥1.24.0) - Numerical computations for 3D projections
-
-### External Services
-- **FormSubmit.co** - Contact form handling (no backend required)
-- **Google Analytics** - Website analytics (ID: G-8T592QEDC5)
+For detailed instructions including LinkedIn post embedding and YouTube video embedding, see [docs/UPDATE_GUIDE.md](docs/UPDATE_GUIDE.md).
 
 ## 🔧 Troubleshooting
 
-### Build fails with "subsurface.png not found"
+### Sections of the page are blank or images are missing
 
-Add the source image to `docs/assets/source/subsurface.png`. See [docs/assets/source/README.md](docs/assets/source/README.md).
+Run `python build.py` to ensure all assets are copied to `dist/`, then serve with `python -m http.server --directory dist 8000`. Do not open `dist/index.html` directly from the filesystem (`file://`).
 
-### Animations don't appear on the site
+### Hero video does not play
 
-1. Check that both GIF files exist in `dist/animations/`
-2. Verify paths in `docs/index.html` use relative URLs: `animations/filename.gif`
-3. Clear browser cache and hard reload (Ctrl+Shift+R / Cmd+Shift+R)
+The file `docs/assets/videos/hero-loop.mp4` must exist. It is committed to the repo. If missing after a shallow clone, run `git lfs pull` or re-clone with full history.
 
 ### GitHub Pages deployment fails
 
 1. Check the **Actions** tab for error logs
 2. Ensure GitHub Pages is configured to use GitHub Actions as source
-3. Verify `scripts/requirements.txt` lists all Python dependencies
+
+## 🤝 Contributing
+
+See [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md).
+
+## 📦 Dependencies
+
+The build script uses only Python's standard library — no pip packages required.
+
+### External services
+- **FormSubmit.co** — contact form handling (no backend required)
+- **Google Analytics** — website analytics (ID: G-8T592QEDC5)
 
 ## 📄 License
 
-This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)**.
+**Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**
 
-**Academic Use:** ✅ Freely permitted for research, education, and non-profit purposes  
-**Commercial Use:** ⚠️ Requires explicit written permission from Applied Environmental Intelligence
+**Academic use:** ✅ Freely permitted for research, education, and non-profit purposes  
+**Commercial use:** ⚠️ Requires explicit written permission from Applied Environmental Intelligence
 
 See [LICENSE](LICENSE) for full terms.
 
 ## 📧 Contact
 
-For questions or support, visit the website's contact form or reach out to the AEI team.
+For questions or support, use the website's contact form or reach out to the AEI team.
 
 ---
 
-**Built with**: Python • Pillow • NumPy • GitHub Actions • GitHub Pages
+**Built with**: Python · GitHub Actions · GitHub Pages

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AEI — MVP Dashboard</title>
+    <meta
+      name="description"
+      content="AEI MVP dashboard: a working proof of concept that ingests synthetic data, assimilates it against the physics, and images ground motion in real time."
+    />
+    <!--
+      ============================================================================
+      AEI MVP DASHBOARD — standalone page
+      ----------------------------------------------------------------------------
+      This page is intentionally kept OUT of the public homepage (docs/index.html)
+      for now. Update the showcase block below as the real dashboard comes online,
+      then link to this page from the homepage nav / CTA when it's ready to show.
+      The CSS variables mirror index.html so the styling stays consistent.
+      ============================================================================
+    -->
+    <style>
+      :root {
+        --bg: #f4f4f2;
+        --surface: #ffffff;
+        --surface-2: #ebebe7;
+        --ink: #15171c;
+        --muted: #6a6e78;
+        --line: rgba(20, 22, 28, 0.12);
+        --accent: #2f6bff;
+        --accent-ink: #ffffff;
+        --data: #1f9e6e;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--ink);
+        color: #f5f6f7;
+        font-family: Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      a.back {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #9aa0a8;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      a.back:hover {
+        color: #f5f6f7;
+      }
+      a.back:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+        color: #f5f6f7;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header
+      style="display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px clamp(20px, 5vw, 72px); border-bottom: 1px solid rgba(255, 255, 255, 0.1);"
+    >
+      <a href="index.html#top" style="display: flex; align-items: baseline; gap: 11px; text-decoration: none; color: inherit;">
+        <span style="font-size: 25px; font-weight: 800; letter-spacing: -0.045em;">AEI</span>
+        <span style="font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase; color: #9aa0a8; white-space: nowrap;">Applied Environmental Intelligence</span>
+      </a>
+      <a class="back" href="index.html#top">← Back to site</a>
+    </header>
+
+    <!-- ===================== SHOWCASE: update this block ===================== -->
+    <section style="background: var(--ink); padding: clamp(56px, 8vw, 116px) clamp(20px, 5vw, 72px);">
+      <div style="max-width: 1240px; margin: 0 auto;">
+        <div style="display: flex; flex-wrap: wrap; gap: clamp(28px, 4vw, 56px); align-items: flex-end; margin-bottom: clamp(32px, 4vw, 48px);">
+          <div style="flex: 1 1 420px; min-width: 280px;">
+            <div style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent);">MVP demo</div>
+            <h1 style="margin: 18px 0 0; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800; color: var(--bg); text-wrap: balance;">A working dashboard.</h1>
+          </div>
+          <p style="flex: 1 1 300px; min-width: 260px; margin: 0; font-size: clamp(15px, 1.4vw, 18px); line-height: 1.6; color: #9aa0a8;">Our first proof of concept: a running dashboard that ingests synthetic data, assimilates it against the physics, and images ground motion in real time — the same loop our production system will run on live sensor feeds.</p>
+        </div>
+
+        <div style="position: relative; aspect-ratio: 21/9; border: 1px solid rgba(255, 255, 255, 0.13); border-radius: 3px; overflow: hidden; background: repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.04) 0 14px, transparent 14px 28px), #15181d;">
+          <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255, 255, 255, 0.13) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.13) 1px, transparent 1px); background-size: 54px 54px; opacity: 0.5;"></div>
+          <div style="position: absolute; left: 0; right: 0; top: 54%; height: 2px; background: linear-gradient(90deg, transparent, #39d3a0, transparent); opacity: 0.8;"></div>
+          <div style="position: absolute; left: 22%; top: 40%; width: 13px; height: 13px; border-radius: 50%; background: #4ea1ff; box-shadow: 0 0 0 6px rgba(78, 161, 255, 0.25);"></div>
+          <div style="position: absolute; left: 22%; top: 40%; transform: translate(16px, -50%); font-size: 11px; color: var(--bg); white-space: nowrap;">ANOMALY · +0.8mm/day</div>
+          <div style="position: absolute; left: 68%; top: 64%; width: 13px; height: 13px; border-radius: 50%; background: #39d3a0; box-shadow: 0 0 0 6px rgba(57, 211, 160, 0.25);"></div>
+          <div style="position: absolute; top: 18px; left: 18px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #9aa0a8; border: 1px solid rgba(255, 255, 255, 0.13); padding: 5px 9px;">MVP · SYNTHETIC DATA</div>
+          <div style="position: absolute; bottom: 18px; left: 18px; right: 18px; display: flex; justify-content: space-between; gap: 12px; font-size: 11px; color: #9aa0a8;">
+            <span>PROOF OF CONCEPT — dV/V velocity-change map</span>
+            <span>SUMMER 2026</span>
+          </div>
+        </div>
+
+        <!--
+          To embed the real dashboard later, replace the mockup <div> above with:
+          <iframe src="https://your-dashboard-url" style="width:100%; aspect-ratio:21/9; border:1px solid rgba(255,255,255,0.13); border-radius:3px;" title="AEI MVP dashboard"></iframe>
+        -->
+      </div>
+    </section>
+    <!-- =================== END SHOWCASE ==================== -->
+  </body>
+</html>

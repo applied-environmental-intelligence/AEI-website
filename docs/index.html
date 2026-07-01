@@ -6,7 +6,7 @@
     <title>Applied Environmental Intelligence</title>
     <meta
       name="description"
-      content="AEI turns distributed ground sensing, satellite imagery, and physics-based models into real-time insight on the ground beneath critical infrastructure for climate and natural risk decisions."
+      content="AEI turns modern geophysical data and AI into live insights on the ground beneath critical infrastructure for climate and natural hazard decisions."
     />
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T592QEDC5"></script>
@@ -20,9 +20,10 @@
     </script>
     <style>
       :root {
-        --bg: #f4f4f2;
+        --bg: #f7f7f5;
         --surface: #ffffff;
         --surface-2: #ebebe7;
+        --surface-3: #eeeeea;
         --ink: #15171c;
         --muted: #6a6e78;
         --line: rgba(20, 22, 28, 0.12);
@@ -38,7 +39,7 @@
       }
       html {
         scroll-behavior: smooth;
-        scroll-padding-top: 86px;
+        scroll-padding-top: 0;
         -webkit-text-size-adjust: 100%;
       }
       body {
@@ -68,6 +69,10 @@
       }
       a.navlink:focus-visible {
         color: var(--ink);
+      }
+
+      section[id] {
+        scroll-margin-top: 0;
       }
 
       /* Scroll-reveal: elements start hidden, JS adds .is-in to reveal.
@@ -160,6 +165,14 @@
         }
       }
       @media (max-width: 720px) {
+        html {
+          scroll-padding-top: 0;
+        }
+
+        section[id] {
+          scroll-margin-top: 0;
+        }
+
         .site-header {
           padding: 12px 14px !important;
         }
@@ -196,18 +209,18 @@
   <body id="top">
     <header
       class="site-header"
-      style="position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 15px clamp(20px, 5vw, 72px); background: var(--bg); border-bottom: 1px solid var(--line);"
+      style="position: relative; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 15px clamp(20px, 5vw, 72px); background: var(--bg); border-bottom: 1px solid var(--line);"
     >
       <a href="#top" style="display: flex; align-items: baseline; gap: 11px; text-decoration: none; color: inherit;">
         <span style="font-size: 25px; font-weight: 800; letter-spacing: -0.045em;">AEI</span>
         <span class="brand-sub" style="font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); white-space: nowrap;">Applied Environmental Intelligence</span>
       </a>
       <nav aria-label="Primary" class="floating-nav" style="display: flex; align-items: center; gap: 20px;">
+        <a class="navlink" href="#industries">What we do</a>
         <a class="navlink" href="#platform">Platform</a>
-        <a class="navlink nav-hide-sm" href="#difference">Difference</a>
-        <a class="navlink" href="#capabilities">Capabilities</a>
         <a class="navlink nav-hide-sm" href="#how">Pipeline</a>
-        <a class="navlink" href="#industries">Industries</a>
+        <a class="navlink" href="#capabilities">Capabilities</a>
+        <a class="navlink nav-hide-sm" href="#difference">Difference</a>
         <a class="navlink" href="#team">Team</a>
         <a class="nav-cta" href="#contact" style="background: var(--accent); color: var(--accent-ink); padding: 9px 16px; border-radius: 2px; font-size: 14px; font-weight: 600; text-decoration: none;">Request a demo</a>
       </nav>
@@ -232,85 +245,174 @@
           <span id="hazLabel" style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #39d3a0;">Sensing geohazards</span>
         </div>
 
-        <h1 style="margin: 24px 0 0; max-width: 15em; font-size: clamp(42px, 6.2vw, 82px); line-height: 0.97; letter-spacing: -0.035em; font-weight: 800; color: #f5f6f7; text-wrap: balance;">Real-time intelligence for a moving planet.</h1>
-        <p style="margin: 26px 0 0; max-width: 33em; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.5; color: rgba(255, 255, 255, 0.72);">AEI turns distributed ground sensing, satellite imagery, and physics-based models into live insight on the ground beneath critical infrastructure for climate and natural risk decisions.</p>
+        <h1 style="margin: 24px 0 0; max-width: 15em; font-size: clamp(38px, 5.6vw, 74px); line-height: 0.98; letter-spacing: -0.035em; font-weight: 800; color: #f5f6f7; text-wrap: balance;">Real-time intelligence for a moving planet.</h1>
+        <p style="margin: 24px 0 0; max-width: 33em; font-size: clamp(16px, 1.35vw, 19px); line-height: 1.5; color: rgba(255, 255, 255, 0.72);">AEI turns modern geophysical data and AI into live insights on the ground beneath critical infrastructure for climate and natural hazard decisions.</p>
         <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px;">
           <a href="#contact" style="display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: var(--accent-ink); padding: 14px 24px; border-radius: 2px; font-size: 15px; font-weight: 600; text-decoration: none;">Request a demo</a>
-          <a href="#platform" style="display: inline-flex; align-items: center; gap: 8px; color: #f5f6f7; padding: 14px 4px; font-size: 15px; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.5);">Explore the platform →</a>
+          <a href="#industries" style="display: inline-flex; align-items: center; gap: 8px; color: #f5f6f7; padding: 14px 4px; font-size: 15px; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.5);">See what we can do →</a>
         </div>
-        <div style="margin-top: 42px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, 0.15); display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255, 255, 255, 0.58); max-width: 40em;">
-          <span>Seismic</span><span style="opacity: 0.4;">/</span><span>Distributed acoustic sensing</span><span style="opacity: 0.4;">/</span><span>Satellite</span>
+        <div style="margin-top: 38px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.15); display: flex; flex-wrap: nowrap; align-items: center; gap: 8px 13px; font-size: clamp(10px, 1vw, 12px); letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.58); max-width: 70em; white-space: nowrap;">
+          <span>Fiber sensing</span><span style="opacity: 0.4;">/</span><span>Seismic</span><span style="opacity: 0.4;">/</span><span>Geophysical networks</span><span style="opacity: 0.4;">/</span><span>Satellite</span>
         </div>
       </div>
     </section>
 
-    <section id="platform" style="background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: clamp(56px, 8vw, 116px) clamp(20px, 5vw, 72px);">
+    <section id="industries" style="background: var(--bg); border-top: 1px solid var(--line); padding: clamp(48px, 7vw, 92px) clamp(20px, 5vw, 72px);">
       <div style="max-width: 1240px; margin: 0 auto;">
-        <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">01 / The platform</div>
-        <h2 data-reveal style="margin: 18px 0 0; max-width: 18em; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800; text-wrap: balance;">We measure the Earth beneath what you build.</h2>
-        <p data-reveal style="margin: 22px 0 0; max-width: 40em; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: var(--muted);">Ground-based sensing is our edge. We operate dense networks of seismic and distributed acoustic sensors, fuse them with satellite imagery, and run physics-based models. Together, they allow us to image the Earth as conditions change.</p>
+        <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">01 / What we can do today</div>
+        <h2 data-reveal style="margin: 16px 0 0; max-width: 18em; font-size: clamp(26px, 3.1vw, 44px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 800;">Where landscape and big infrastructure meet.</h2>
+        <p data-reveal style="margin: 20px 0 0; max-width: 38em; font-size: clamp(15px, 1.25vw, 17.5px); line-height: 1.58; color: var(--muted);">We work with operators whose assets sit on moving ground. Understanding the Earth is central to safety, cost, and climate risk.</p>
+
+        <div style="margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: clamp(16px, 2vw, 24px);">
+          <div data-reveal style="border: 1px solid var(--line); background: var(--surface); border-radius: 3px; overflow: hidden;">
+            <div style="aspect-ratio: 3/2; position: relative; background: var(--surface-2);">
+              <img src="https://images.pexels.com/photos/33263124/pexels-photo-33263124.jpeg?auto=compress&cs=tinysrgb&w=1400&h=900&fit=crop" alt="Dam and downstream river corridor used to represent tailings risk monitoring" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+              <div style="position: absolute; left: 10%; right: 12%; top: 64%; height: 2px; background: rgba(57, 211, 160, 0.9);"></div>
+              <div style="position: absolute; left: 10%; top: calc(64% - 5px); width: 10px; height: 10px; border-radius: 50%; background: rgba(57, 211, 160, 0.95); box-shadow: 0 0 0 4px rgba(57, 211, 160, 0.25);"></div>
+              <div style="position: absolute; left: 58%; top: calc(64% - 5px); width: 10px; height: 10px; border-radius: 50%; background: rgba(78, 161, 255, 0.95); box-shadow: 0 0 0 4px rgba(78, 161, 255, 0.25);"></div>
+              <div style="position: absolute; right: 12%; top: calc(64% - 5px); width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.95); box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);"></div>
+              <div style="position: absolute; left: 12%; top: 68%; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.92);">Fiber route</div>
+              <div style="position: absolute; right: 10%; top: 68%; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.92);">Downstream community</div>
+              <span style="position: absolute; top: 13px; left: 13px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--line); padding: 4px 7px;">site imagery</span>
+            </div>
+            <div style="padding: 24px 22px 26px;">
+              <h3 style="margin: 0 0 8px; font-size: 19px; font-weight: 700;">Mining</h3>
+              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Slope stability, tailings dams, and subsidence monitored from inside the ground, not just from the air.</p>
+            </div>
+          </div>
+
+          <div data-reveal data-reveal-delay="80" style="border: 1px solid var(--line); background: var(--surface); border-radius: 3px; overflow: hidden;">
+            <div style="aspect-ratio: 3/2; position: relative; background: var(--surface-2);">
+              <img src="assets/industries/data-center-farmland.jpg" alt="Aerial view of a hyperscale data center building surrounded by open farmland" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+              <span style="position: absolute; top: 13px; left: 13px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--line); padding: 4px 7px;">site imagery</span>
+              <span style="position: absolute; bottom: 9px; right: 11px; font-size: 9px; letter-spacing: 0.04em; color: rgba(255, 255, 255, 0.82); text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);">Photo: Chad Davis / <a href="https://creativecommons.org/licenses/by/2.0/" style="color: inherit; text-decoration: underline;">CC BY 2.0</a></span>
+            </div>
+            <div style="padding: 24px 22px 26px;">
+              <h3 style="margin: 0 0 8px; font-size: 19px; font-weight: 700;">Data centers</h3>
+              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Ground conditions, seismic exposure, and perimeter integrity for the most siting-sensitive builds in the world.</p>
+            </div>
+          </div>
+
+          <div data-reveal data-reveal-delay="160" style="border: 1px solid var(--line); background: var(--surface); border-radius: 3px; overflow: hidden;">
+            <div style="aspect-ratio: 3/2; position: relative; background: var(--surface-2);">
+              <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1400&q=80" alt="Power transmission infrastructure" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+              <span style="position: absolute; top: 13px; left: 13px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--line); padding: 4px 7px;">site imagery</span>
+            </div>
+            <div style="padding: 24px 22px 26px;">
+              <h3 style="margin: 0 0 8px; font-size: 19px; font-weight: 700;">Energy &amp; utilities</h3>
+              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Pipelines, transmission, and linear assets watched continuously along their entire length.</p>
+            </div>
+          </div>
+
+          <div data-reveal data-reveal-delay="240" style="border: 1px solid var(--line); background: var(--surface); border-radius: 3px; overflow: hidden;">
+            <div style="aspect-ratio: 3/2; position: relative; background: var(--surface-2);">
+              <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1400&q=80" alt="Urban skyline representing climate risk planning" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+              <span style="position: absolute; top: 13px; left: 13px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--line); padding: 4px 7px;">site imagery</span>
+            </div>
+            <div style="padding: 24px 22px 26px;">
+              <h3 style="margin: 0 0 8px; font-size: 19px; font-weight: 700;">Urban &amp; climate risk</h3>
+              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Subsidence, groundwater, and hazard exposure for cities adapting to a changing climate.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="platform" style="background: var(--surface); border-top: 1px solid var(--line); padding: clamp(48px, 7vw, 92px) clamp(20px, 5vw, 72px);">
+      <div style="max-width: 1240px; margin: 0 auto;">
+        <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">02 / The platform</div>
+        <h2 data-reveal style="margin: 16px 0 0; max-width: 18em; font-size: clamp(26px, 3.1vw, 44px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 800; text-wrap: balance;">We measure the Earth beneath what you build.</h2>
+        <p data-reveal style="margin: 20px 0 0; max-width: 40em; font-size: clamp(15px, 1.25vw, 17.5px); line-height: 1.58; color: var(--muted);">Ground-based sensing is our edge. We leverage dense geophysical networks and satellite data fused with physics-based AI models to provide actionable insight for the people managing critical assets.</p>
 
         <div style="margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line);">
           <div data-reveal style="background: var(--surface); padding: 30px 26px;">
             <div style="font-size: 12px; color: var(--accent); letter-spacing: 0.08em;">01</div>
-            <h3 style="margin: 16px 0 8px; font-size: 19px; font-weight: 700; letter-spacing: -0.01em;">Ground-truth sensing</h3>
-            <p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted);">Dense seismic and distributed acoustic sensing networks provide on-the-ground signal missing from standard remote sensing approaches.</p>
-          </div>
-          <div data-reveal data-reveal-delay="80" style="background: var(--surface); padding: 30px 26px;">
-            <div style="font-size: 12px; color: var(--accent); letter-spacing: 0.08em;">02</div>
-            <h3 style="margin: 16px 0 8px; font-size: 19px; font-weight: 700; letter-spacing: -0.01em;">Multi-modal data fusion</h3>
-            <p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted);">Ground sensors and satellite imagery resolved into one coherent picture of the landscape over time.</p>
+            <h3 style="margin: 16px 0 8px; font-size: 18px; font-weight: 700; letter-spacing: -0.01em;">Geophysical sensing &amp; data fusion</h3>
+            <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Geophysical networks including seismic and fiber sensing combine with satellite data to build one coherent picture of the landscape over time.</p>
           </div>
           <div data-reveal data-reveal-delay="160" style="background: var(--surface); padding: 30px 26px;">
+            <div style="font-size: 12px; color: var(--accent); letter-spacing: 0.08em;">02</div>
+            <h3 style="margin: 16px 0 8px; font-size: 18px; font-weight: 700; letter-spacing: -0.01em;">Physics-grounded models</h3>
+            <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Earth physics, not curve-fitting alone. Models that explain observations and hold up under scrutiny.</p>
+          </div>
+          <div data-reveal data-reveal-delay="80" style="background: var(--surface); padding: 30px 26px;">
             <div style="font-size: 12px; color: var(--accent); letter-spacing: 0.08em;">03</div>
-            <h3 style="margin: 16px 0 8px; font-size: 19px; font-weight: 700; letter-spacing: -0.01em;">Physics-grounded models</h3>
-            <p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted);">Earth physics, not curve-fitting. Models that explain observations and hold up under scrutiny.</p>
+            <h3 style="margin: 16px 0 8px; font-size: 18px; font-weight: 700; letter-spacing: -0.01em;">AI-powered analysis</h3>
+            <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Machine learning resolves messy, high-volume geophysical data into patterns and insight operators can act on.</p>
           </div>
           <div data-reveal data-reveal-delay="240" style="background: var(--surface); padding: 30px 26px;">
             <div style="font-size: 12px; color: var(--accent); letter-spacing: 0.08em;">04</div>
-            <h3 style="margin: 16px 0 8px; font-size: 19px; font-weight: 700; letter-spacing: -0.01em;">Transparent agentic pipelines</h3>
-            <p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--muted);">Robust, auditable pipelines that show their work from raw signal to action.</p>
+            <h3 style="margin: 16px 0 8px; font-size: 18px; font-weight: 700; letter-spacing: -0.01em;">Transparent agentic pipelines</h3>
+            <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Robust, auditable AI pipelines that show their work from raw signal to action.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="difference" style="border-bottom: 1px solid var(--line); padding: clamp(56px, 8vw, 116px) clamp(20px, 5vw, 72px);">
+    <section id="how" style="background: var(--bg); border-top: 1px solid var(--line); padding: clamp(48px, 7vw, 92px) clamp(20px, 5vw, 72px);">
       <div style="max-width: 1240px; margin: 0 auto;">
-        <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">02 / The difference</div>
-        <h2 data-reveal style="margin: 18px 0 0; max-width: 15em; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800; text-wrap: balance;">Most tools see half the picture. We model the whole system.</h2>
-        <p data-reveal style="margin: 22px 0 0; max-width: 42em; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: var(--muted);">The field is split between ground-based and remote sensing, and most approaches are purely data-centric. AEI fuses both and adds the physics. That's why our picture holds together where single-source, data-only tools fall apart.</p>
+        <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">03 / The pipeline</div>
+        <h2 data-reveal style="margin: 16px 0 0; max-width: 17em; font-size: clamp(26px, 3.1vw, 44px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 800;">From noisy signal to a decision you can defend, powered by GeoAI.</h2>
+        <p data-reveal style="margin: 20px 0 0; max-width: 40em; font-size: clamp(15px, 1.25vw, 17.5px); line-height: 1.58; color: var(--muted);">Field data is messy, disaggregated, and incomplete. Our AI pipelines are agentic but never opaque. AEI gets the most out of the data and infrastructure you already have while staying grounded in earth science, robust to noise, and auditable from end to end.</p>
 
-        <div style="margin-top: clamp(40px, 5vw, 60px); display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: clamp(16px, 2vw, 24px);">
-          <div data-reveal style="background: var(--surface-2); border: 1px solid var(--line); border-radius: 3px; padding: clamp(26px, 3vw, 34px);">
-            <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">The status quo</div>
-            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">-</span><span>Ground sensors <em>or</em> satellite, rarely fused</span></div>
-            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">-</span><span>Purely data-centric, with no physical model of the Earth</span></div>
-            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">-</span><span>Siloed data streams and siloed analysis</span></div>
-            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">-</span><span>Insight locked behind deep, scarce expertise</span></div>
-            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">-</span><span>Black-box outputs that are hard to audit or trust</span></div>
-            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">-</span><span>Backward-looking snapshots and static reports</span></div>
+        <div style="margin-top: clamp(40px, 5vw, 60px); display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: clamp(14px, 1.8vw, 22px);">
+          <div data-reveal style="background: var(--surface); border: 1px solid var(--line); border-radius: 3px; padding: 24px 22px;">
+            <div style="font-size: 11px; letter-spacing: 0.12em; color: var(--accent);">STEP 01</div>
+            <h3 style="margin: 14px 0 7px; font-size: 18px; font-weight: 700;">Sense</h3>
+            <p style="margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Continuous data from ground networks and satellites streams in.</p>
           </div>
-
-          <div data-reveal data-reveal-delay="120" style="background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 3px; padding: clamp(26px, 3vw, 34px);">
-            <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px;">The AEI approach</div>
-            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; font-size: 15.5px; line-height: 1.5;"><span style="flex: none; color: var(--accent); font-weight: 700;">+</span><span>Ground <em>and</em> satellite, fused into one coherent record</span></div>
-            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5;"><span style="flex: none; color: var(--accent); font-weight: 700;">+</span><span>Physics-based models, grounded in earth science</span></div>
-            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5;"><span style="flex: none; color: var(--accent); font-weight: 700;">+</span><span>Uncertainty quantified on every output</span></div>
-            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5;"><span style="flex: none; color: var(--accent); font-weight: 700;">+</span><span>Transparent, continuously evaluated pipelines</span></div>
-            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5;"><span style="flex: none; color: var(--accent); font-weight: 700;">+</span><span>Expertise translated into decision-ready language</span></div>
-            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5;"><span style="flex: none; color: var(--accent); font-weight: 700;">+</span><span>A living model that assimilates new data and projects forward</span></div>
+          <div data-reveal data-reveal-delay="80" style="background: var(--surface); border: 1px solid var(--line); border-radius: 3px; padding: 24px 22px;">
+            <div style="font-size: 11px; letter-spacing: 0.12em; color: var(--accent);">STEP 02</div>
+            <h3 style="margin: 14px 0 7px; font-size: 18px; font-weight: 700;">Fuse</h3>
+            <p style="margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Sources are aligned in space and time into one coherent record.</p>
+          </div>
+          <div data-reveal data-reveal-delay="160" style="background: var(--surface); border: 1px solid var(--line); border-radius: 3px; padding: 24px 22px;">
+            <div style="font-size: 11px; letter-spacing: 0.12em; color: var(--accent);">STEP 03</div>
+            <h3 style="margin: 14px 0 7px; font-size: 18px; font-weight: 700;">Model</h3>
+            <p style="margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Physics and AI-based models infer what's happening beneath the surface.</p>
+          </div>
+          <div data-reveal data-reveal-delay="240" style="background: var(--surface); border: 1px solid var(--line); border-radius: 3px; padding: 24px 22px;">
+            <div style="font-size: 11px; letter-spacing: 0.12em; color: var(--accent);">STEP 04</div>
+            <h3 style="margin: 14px 0 7px; font-size: 18px; font-weight: 700;">Analyze</h3>
+            <p style="margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Results render as live analytics and imagery of the ground and its behavior.</p>
+          </div>
+          <div data-reveal data-reveal-delay="320" style="background: var(--surface); border: 1px solid var(--line); border-radius: 3px; padding: 24px 22px;">
+            <div style="font-size: 11px; letter-spacing: 0.12em; color: var(--accent);">STEP 05</div>
+            <h3 style="margin: 14px 0 7px; font-size: 18px; font-weight: 700;">Decide</h3>
+            <p style="margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted);">A traceable alert or assessment, with the evidence attached.</p>
           </div>
         </div>
+
+        <div data-reveal style="margin-top: clamp(36px, 4vw, 52px); padding-top: clamp(28px, 3vw, 40px); border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: clamp(22px, 3vw, 44px);">
+          <div style="flex: 1 1 200px; min-width: 180px;">
+            <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">Transparent</div>
+            <p style="margin: 9px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Every result traces back to the raw signal that produced it.</p>
+          </div>
+          <div style="flex: 1 1 200px; min-width: 180px;">
+            <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">Uncertainty-quantified</div>
+            <p style="margin: 9px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Confidence travels with the answer, never a number without a margin.</p>
+          </div>
+          <div style="flex: 1 1 200px; min-width: 180px;">
+            <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">Robust to noise</div>
+            <p style="margin: 9px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Built for real field conditions with gaps, drift, and bad sensors included.</p>
+          </div>
+          <div style="flex: 1 1 200px; min-width: 180px;">
+            <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">Continuously evaluated</div>
+            <p style="margin: 9px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Evaluations are a core principle, not an afterthought. We measure what we ship.</p>
+          </div>
+        </div>
+
+        <p data-reveal style="margin: clamp(30px, 3vw, 44px) 0 0; max-width: 46em; font-size: clamp(16px, 1.5vw, 20px); line-height: 1.55; color: var(--ink); font-weight: 500;">AI is the instrument, not the decision-maker. We build augmented intelligence that keeps humans centered while providing deep geophysical reasoning in language people can act on. AEI lowers the barrier between science and action, helping teams use complex data instead of black-boxing it.</p>
       </div>
     </section>
 
-    <section id="capabilities" style="padding: clamp(56px, 8vw, 116px) clamp(20px, 5vw, 72px);">
+    <section id="capabilities" style="background: var(--surface-3); border-top: 1px solid var(--line); padding: clamp(48px, 7vw, 92px) clamp(20px, 5vw, 72px);">
       <div style="max-width: 1240px; margin: 0 auto;">
         <div style="display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-end; justify-content: space-between;">
           <div>
-            <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">03 / Capabilities</div>
-            <h2 data-reveal style="margin: 18px 0 0; max-width: 16em; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800;">Three sensing modalities, one model of the ground.</h2>
+            <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">04 / Capabilities</div>
+            <h2 data-reveal style="margin: 16px 0 0; max-width: 16em; font-size: clamp(26px, 3.1vw, 44px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 800;">Many sensing modalities, one model of the ground.</h2>
+            <p data-reveal style="margin: 15px 0 0; max-width: 40em; font-size: clamp(14.5px, 1.15vw, 16.5px); line-height: 1.58; color: var(--muted);">Our data streams include seismic arrays, fiber sensing, and satellite imagery, with room for additional geophysical networks and integration with existing sensors.</p>
           </div>
         </div>
 
@@ -363,126 +465,38 @@
       </div>
     </section>
 
-    <section id="how" style="background: var(--surface-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: clamp(56px, 8vw, 116px) clamp(20px, 5vw, 72px);">
+    <section id="difference" style="background: var(--bg); border-top: 1px solid var(--line); padding: clamp(48px, 7vw, 92px) clamp(20px, 5vw, 72px);">
       <div style="max-width: 1240px; margin: 0 auto;">
-        <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">04 / The pipeline</div>
-        <h2 data-reveal style="margin: 18px 0 0; max-width: 17em; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800;">From noisy signal to a decision you can defend.</h2>
-        <p data-reveal style="margin: 22px 0 0; max-width: 40em; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: var(--muted);">Field data is messy, disaggregated, and incomplete. Our pipelines are agentic but never opaque. They are grounded in earth science, robust to noise, and auditable end to end, with uncertainty carried through every step. So you can take the output to a regulator, board, or engineering team.</p>
+        <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">05 / The difference</div>
+        <h2 data-reveal style="margin: 16px 0 0; max-width: 15em; font-size: clamp(26px, 3.1vw, 44px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 800; text-wrap: balance;">Most tools see half the picture. We model the whole system.</h2>
+        <p data-reveal style="margin: 20px 0 0; max-width: 42em; font-size: clamp(15px, 1.25vw, 17.5px); line-height: 1.58; color: var(--muted);">Infrastructure is usually monitored either from the ground or from space. AEI brings both views together, adds physics and machine learning, and turns the combined picture into decision-ready insight. That's why our picture holds together where single-source, data-only tools fall apart.</p>
 
-        <div style="margin-top: clamp(40px, 5vw, 60px); display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: clamp(14px, 1.8vw, 22px);">
-          <div data-reveal style="background: var(--surface); border: 1px solid var(--line); border-radius: 3px; padding: 24px 22px;">
-            <div style="font-size: 11px; letter-spacing: 0.12em; color: var(--accent);">STEP 01</div>
-            <h3 style="margin: 14px 0 7px; font-size: 18px; font-weight: 700;">Sense</h3>
-            <p style="margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Continuous data from ground networks and satellites streams in.</p>
-          </div>
-          <div data-reveal data-reveal-delay="80" style="background: var(--surface); border: 1px solid var(--line); border-radius: 3px; padding: 24px 22px;">
-            <div style="font-size: 11px; letter-spacing: 0.12em; color: var(--accent);">STEP 02</div>
-            <h3 style="margin: 14px 0 7px; font-size: 18px; font-weight: 700;">Fuse</h3>
-            <p style="margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Sources are aligned in space and time into one coherent record.</p>
-          </div>
-          <div data-reveal data-reveal-delay="160" style="background: var(--surface); border: 1px solid var(--line); border-radius: 3px; padding: 24px 22px;">
-            <div style="font-size: 11px; letter-spacing: 0.12em; color: var(--accent);">STEP 03</div>
-            <h3 style="margin: 14px 0 7px; font-size: 18px; font-weight: 700;">Model</h3>
-            <p style="margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Physics-based models infer what's happening beneath the surface.</p>
-          </div>
-          <div data-reveal data-reveal-delay="240" style="background: var(--surface); border: 1px solid var(--line); border-radius: 3px; padding: 24px 22px;">
-            <div style="font-size: 11px; letter-spacing: 0.12em; color: var(--accent);">STEP 04</div>
-            <h3 style="margin: 14px 0 7px; font-size: 18px; font-weight: 700;">Image</h3>
-            <p style="margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Results render as live imagery of the ground and its motion.</p>
-          </div>
-          <div data-reveal data-reveal-delay="320" style="background: #2b3139; border: 1px solid #2b3139; border-radius: 3px; padding: 24px 22px;">
-            <div style="font-size: 11px; letter-spacing: 0.12em; color: var(--accent);">STEP 05</div>
-            <h3 style="margin: 14px 0 7px; font-size: 18px; font-weight: 700; color: var(--bg);">Decide</h3>
-            <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #c8ced6;">A traceable alert or assessment, with the evidence attached.</p>
-          </div>
-        </div>
-
-        <div data-reveal style="margin-top: clamp(36px, 4vw, 52px); padding-top: clamp(28px, 3vw, 40px); border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: clamp(22px, 3vw, 44px);">
-          <div style="flex: 1 1 200px; min-width: 180px;">
-            <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">Transparent</div>
-            <p style="margin: 9px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Every result traces back to the raw signal that produced it.</p>
-          </div>
-          <div style="flex: 1 1 200px; min-width: 180px;">
-            <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">Uncertainty-quantified</div>
-            <p style="margin: 9px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Confidence travels with the answer, never a number without a margin.</p>
-          </div>
-          <div style="flex: 1 1 200px; min-width: 180px;">
-            <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">Robust to noise</div>
-            <p style="margin: 9px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Built for real field conditions with gaps, drift, and bad sensors included.</p>
-          </div>
-          <div style="flex: 1 1 200px; min-width: 180px;">
-            <div style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">Continuously evaluated</div>
-            <p style="margin: 9px 0 0; font-size: 14px; line-height: 1.5; color: var(--muted);">Evaluations are a core principle, not an afterthought. We measure what we ship.</p>
-          </div>
-        </div>
-
-        <p data-reveal style="margin: clamp(30px, 3vw, 44px) 0 0; max-width: 46em; font-size: clamp(16px, 1.5vw, 20px); line-height: 1.55; color: var(--ink); font-weight: 500;">AI is the instrument, not the decision-maker. We build augmented intelligence that keeps humans centered while providing deep geophysical reasoning in language people can act on. AEI lowers the barrier between science and action, helping to reskill teams instead of black-boxing them.</p>
-      </div>
-    </section>
-
-    <section id="industries" style="padding: clamp(56px, 8vw, 116px) clamp(20px, 5vw, 72px);">
-      <div style="max-width: 1240px; margin: 0 auto;">
-        <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">05 / What we can do today</div>
-        <h2 data-reveal style="margin: 18px 0 0; max-width: 18em; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800;">Where the landscape and big infrastructure meet.</h2>
-        <p data-reveal style="margin: 22px 0 0; max-width: 38em; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: var(--muted);">We work with operators whose assets sit on moving ground. Understanding the Earth is a safety, cost, and climate risk question all at once.</p>
-
-        <div style="margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: clamp(16px, 2vw, 24px);">
-          <div data-reveal style="border: 1px solid var(--line); border-radius: 3px; overflow: hidden;">
-            <div style="aspect-ratio: 3/2; position: relative; background: var(--surface-2);">
-              <img src="https://images.pexels.com/photos/33263124/pexels-photo-33263124.jpeg?auto=compress&cs=tinysrgb&w=1400&h=900&fit=crop" alt="Dam and downstream river corridor used to represent tailings risk monitoring" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-              <div style="position: absolute; left: 10%; right: 12%; top: 64%; height: 2px; background: rgba(57, 211, 160, 0.9);"></div>
-              <div style="position: absolute; left: 10%; top: calc(64% - 5px); width: 10px; height: 10px; border-radius: 50%; background: rgba(57, 211, 160, 0.95); box-shadow: 0 0 0 4px rgba(57, 211, 160, 0.25);"></div>
-              <div style="position: absolute; left: 58%; top: calc(64% - 5px); width: 10px; height: 10px; border-radius: 50%; background: rgba(78, 161, 255, 0.95); box-shadow: 0 0 0 4px rgba(78, 161, 255, 0.25);"></div>
-              <div style="position: absolute; right: 12%; top: calc(64% - 5px); width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.95); box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);"></div>
-              <div style="position: absolute; left: 12%; top: 68%; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.92);">Fiber route</div>
-              <div style="position: absolute; right: 10%; top: 68%; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.92);">Downstream community</div>
-              <span style="position: absolute; top: 13px; left: 13px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--line); padding: 4px 7px;">site imagery</span>
-            </div>
-            <div style="padding: 24px 22px 26px;">
-              <h3 style="margin: 0 0 8px; font-size: 19px; font-weight: 700;">Mining</h3>
-              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Slope stability, tailings dams, and subsidence monitored from inside the ground, not just from the air.</p>
-            </div>
+        <div style="margin-top: clamp(40px, 5vw, 60px); display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: clamp(16px, 2vw, 24px);">
+          <div data-reveal style="background: var(--surface-3); border: 1px solid var(--line); border-radius: 3px; padding: clamp(26px, 3vw, 34px);">
+            <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">The status quo</div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">-</span><span>Ground sensors <em>or</em> satellite, rarely fused</span></div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">-</span><span>Purely data-centric, with no physical model of the Earth</span></div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">-</span><span>Siloed data streams and siloed analysis</span></div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">-</span><span>Insight locked behind deep, scarce expertise</span></div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">-</span><span>Black-box outputs that are hard to audit or trust</span></div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5; color: var(--muted);"><span style="flex: none; opacity: 0.6;">-</span><span>Backward-looking snapshots and static reports</span></div>
           </div>
 
-          <div data-reveal data-reveal-delay="80" style="border: 1px solid var(--line); border-radius: 3px; overflow: hidden;">
-            <div style="aspect-ratio: 3/2; position: relative; background: var(--surface-2);">
-              <img src="assets/industries/data-center-farmland.jpg" alt="Aerial view of a hyperscale data center building surrounded by open farmland" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-              <span style="position: absolute; top: 13px; left: 13px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--line); padding: 4px 7px;">site imagery</span>
-              <span style="position: absolute; bottom: 9px; right: 11px; font-size: 9px; letter-spacing: 0.04em; color: rgba(255, 255, 255, 0.82); text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);">Photo: Chad Davis / <a href="https://creativecommons.org/licenses/by/2.0/" style="color: inherit; text-decoration: underline;">CC BY 2.0</a></span>
-            </div>
-            <div style="padding: 24px 22px 26px;">
-              <h3 style="margin: 0 0 8px; font-size: 19px; font-weight: 700;">Data centers</h3>
-              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Ground conditions, seismic exposure, and perimeter integrity for the most siting-sensitive builds in the world.</p>
-            </div>
-          </div>
-
-          <div data-reveal data-reveal-delay="160" style="border: 1px solid var(--line); border-radius: 3px; overflow: hidden;">
-            <div style="aspect-ratio: 3/2; position: relative; background: var(--surface-2);">
-              <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1400&q=80" alt="Power transmission infrastructure" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-              <span style="position: absolute; top: 13px; left: 13px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--line); padding: 4px 7px;">site imagery</span>
-            </div>
-            <div style="padding: 24px 22px 26px;">
-              <h3 style="margin: 0 0 8px; font-size: 19px; font-weight: 700;">Energy &amp; utilities</h3>
-              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Pipelines, transmission, and linear assets watched continuously along their entire length.</p>
-            </div>
-          </div>
-
-          <div data-reveal data-reveal-delay="240" style="border: 1px solid var(--line); border-radius: 3px; overflow: hidden;">
-            <div style="aspect-ratio: 3/2; position: relative; background: var(--surface-2);">
-              <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1400&q=80" alt="Urban skyline representing climate risk planning" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-              <span style="position: absolute; top: 13px; left: 13px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--surface); border: 1px solid var(--line); padding: 4px 7px;">site imagery</span>
-            </div>
-            <div style="padding: 24px 22px 26px;">
-              <h3 style="margin: 0 0 8px; font-size: 19px; font-weight: 700;">Urban &amp; climate risk</h3>
-              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Subsidence, groundwater, and hazard exposure for cities adapting to a changing climate.</p>
-            </div>
+          <div data-reveal data-reveal-delay="120" style="background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 3px; padding: clamp(26px, 3vw, 34px);">
+            <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px;">The AEI approach</div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; font-size: 15.5px; line-height: 1.5;"><span style="flex: none; color: var(--accent); font-weight: 700;">+</span><span>Ground <em>and</em> satellite, fused into one coherent record</span></div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15px; line-height: 1.5;"><span style="flex: none; color: var(--accent); font-weight: 700;">+</span><span>AI-based models grounded in Earth physics</span></div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5;"><span style="flex: none; color: var(--accent); font-weight: 700;">+</span><span>Uncertainty quantified on every output</span></div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5;"><span style="flex: none; color: var(--accent); font-weight: 700;">+</span><span>Transparent, continuously evaluated AI pipelines</span></div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15.5px; line-height: 1.5;"><span style="flex: none; color: var(--accent); font-weight: 700;">+</span><span>Expertise translated into decision-ready language</span></div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 0 0; border-top: 1px solid var(--line); margin-top: 14px; font-size: 15px; line-height: 1.5;"><span style="flex: none; color: var(--accent); font-weight: 700;">+</span><span>Living models that assimilate new data and project forward</span></div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Temporary launch choice: keep showcase markup in source but hide until dashboard is production-ready. -->
-    <section id="showcase" style="display: none; background: var(--ink); padding: clamp(56px, 8vw, 116px) clamp(20px, 5vw, 72px);">
+    <section id="showcase" style="display: none; background: var(--ink); padding: clamp(48px, 7vw, 92px) clamp(20px, 5vw, 72px);">
       <div style="max-width: 1240px; margin: 0 auto;">
         <div style="display: flex; flex-wrap: wrap; gap: clamp(28px, 4vw, 56px); align-items: flex-end; margin-bottom: clamp(32px, 4vw, 48px);">
           <div style="flex: 1 1 420px; min-width: 280px;">
@@ -507,47 +521,53 @@
       </div>
     </section>
 
-    <section id="team" style="border-top: 1px solid var(--line); padding: clamp(56px, 8vw, 116px) clamp(20px, 5vw, 72px);">
+    <section id="team" style="background: var(--surface); border-top: 1px solid var(--line); padding: clamp(48px, 7vw, 92px) clamp(20px, 5vw, 72px);">
       <div style="max-width: 1240px; margin: 0 auto;">
-        <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">07 / Team</div>
-        <h2 data-reveal style="margin: 18px 0 0; max-width: 16em; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800;">Team</h2>
-        <p data-reveal style="margin: 22px 0 0; max-width: 36em; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: var(--muted);">AEI was founded out of the University of Washington's FiberLab, where the novel research behind our platform continues every day.</p>
+        <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">06 / Team</div>
+        <h2 data-reveal style="margin: 16px 0 0; max-width: 16em; font-size: clamp(26px, 3.1vw, 44px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 800;">Team</h2>
+        <p data-reveal style="margin: 20px 0 0; max-width: 36em; font-size: clamp(15px, 1.25vw, 17.5px); line-height: 1.58; color: var(--muted);">AEI was founded out of the University of Washington's FiberLab, where the novel research behind our platform continues every day.</p>
 
         <div style="margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: clamp(28px, 3.5vw, 48px);">
           <div data-reveal style="display: flex; flex-direction: column; gap: 16px;">
             <img src="assets/portraits/stephanie-olinger.jpg" alt="Stephanie Olinger" loading="lazy" decoding="async" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center 22%; border-radius: 4px; background: var(--surface-2);" />
             <div>
               <h3 style="margin: 0 0 4px; font-size: 19px; font-weight: 700; letter-spacing: -0.01em;">Stephanie Olinger, PhD</h3>
-              <div style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px;">Cofounder · Operations Lead</div>
-              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Cofounded AEI to bring modern geophysical sensing to real-world problems. Leads fundraising, partnerships, and commercialization of AEI's monitoring solutions.</p>
+              <div style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);">Cofounder · Operations Lead</div>
+              <div style="font-size: 12px; line-height: 1.45; color: var(--muted); margin: 6px 0 10px; min-height: 35px;">PhD, Harvard · UW FiberLab</div>
+              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted); min-height: 112px;">Cofounded AEI to bring modern geophysical sensing to real-world problems. Leads fundraising, partnerships, and commercialization of AEI's innovative solutions.</p>
             </div>
           </div>
           <div data-reveal data-reveal-delay="100" style="display: flex; flex-direction: column; gap: 16px;">
             <img src="https://i.postimg.cc/WbXDjS17/bl.jpg" alt="Prof. Brad Lipovsky" loading="lazy" decoding="async" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 4px; background: var(--surface-2);" />
             <div>
               <h3 style="margin: 0 0 4px; font-size: 19px; font-weight: 700; letter-spacing: -0.01em;">Prof. Brad Lipovsky</h3>
-              <div style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px;">Cofounder · Sensing Lead</div>
-              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Principal investigator of UW's FiberLab, applying novel fiber sensing techniques to geophysics. Leads hardware, deployment logistics, and technical strategy.</p>
+              <div style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);">Cofounder · Sensing Guru</div>
+              <div style="font-size: 12px; line-height: 1.45; color: var(--muted); margin: 6px 0 10px; min-height: 35px;">PhD, Stanford · Professor, University of Washington</div>
+              <p style="margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted); min-height: 112px;">Principal investigator of UW's FiberLab, applying novel fiber sensing techniques to geophysics. Leads geophysical data analysis, physics-based modeling, and technical strategy.</p>
             </div>
           </div>
           <div data-reveal data-reveal-delay="200" style="display: flex; flex-direction: column; gap: 16px;">
             <img src="https://i.postimg.cc/BQM8sNn7/md.jpg" alt="Prof. Marine Denolle" loading="lazy" decoding="async" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 4px; background: var(--surface-2);" />
             <div>
               <h3 style="margin: 0 0 4px; font-size: 19px; font-weight: 700; letter-spacing: -0.01em;">Prof. Marine Denolle</h3>
-              <div style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px;">Cofounder · AI Lead</div>
-              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted);">Builds AI-powered big-data pipelines to characterize geophysical systems. Leads AI integration, software and model development, and data-processing strategy.</p>
+              <div style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);">Cofounder · AI Visionary</div>
+              <div style="font-size: 12px; line-height: 1.45; color: var(--muted); margin: 6px 0 10px; min-height: 35px; display: grid; grid-template-columns: max-content 1fr; column-gap: 0.55ch;">
+                <span>PhD, Stanford ·</span><span>Professor, University of Washington</span>
+                <span></span><span>Professor, Harvard (Former)</span>
+              </div>
+              <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted); min-height: 112px;">Builds AI-powered big-data pipelines to characterize geophysical systems. Leads AI integration, software and model development, and data-processing strategy.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="contact" style="background: var(--surface); border-top: 1px solid var(--line); padding: clamp(56px, 8vw, 116px) clamp(20px, 5vw, 72px);">
+    <section id="contact" style="background: var(--bg); border-top: 1px solid var(--line); padding: clamp(48px, 7vw, 92px) clamp(20px, 5vw, 72px);">
       <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: clamp(36px, 5vw, 72px);">
         <div style="flex: 1 1 360px; min-width: 280px;">
-          <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">08 / Contact</div>
-          <h2 data-reveal style="margin: 18px 0 0; max-width: 13em; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800;">Let's look at your ground.</h2>
-          <p data-reveal style="margin: 22px 0 0; max-width: 30em; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: var(--muted);">Tell us about your site or network and we'll get back to you to scope a demo. Partners, operators, and investors welcome.</p>
+          <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">07 / Contact</div>
+          <h2 data-reveal style="margin: 16px 0 0; max-width: 13em; font-size: clamp(26px, 3.1vw, 44px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 800;">Let's look at your ground.</h2>
+          <p data-reveal style="margin: 20px 0 0; max-width: 30em; font-size: clamp(15px, 1.25vw, 17.5px); line-height: 1.58; color: var(--muted);">Tell us about your site or network and we'll get back to you to scope a demo. Partners, operators, and investors welcome.</p>
         </div>
 
         <div data-reveal style="flex: 1 1 420px; min-width: 300px;">
@@ -555,33 +575,20 @@
             <input type="hidden" name="_captcha" value="false" />
             <div style="display: flex; gap: 16px; flex-wrap: wrap;">
               <label style="flex: 1 1 0; min-width: 140px; display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);">First name
-                <input type="text" name="first_name" required style="width: 100%; margin-top: 8px; padding: 13px; font-size: 16px; font-family: inherit; border: 1px solid var(--line); border-radius: 2px; background: var(--bg); color: var(--ink);" />
+                <input type="text" name="first_name" required style="width: 100%; margin-top: 8px; padding: 13px; font-size: 16px; font-family: inherit; border: 1px solid var(--line); border-radius: 2px; background: var(--surface); color: var(--ink);" />
               </label>
               <label style="flex: 1 1 0; min-width: 140px; display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);">Last name
-                <input type="text" name="last_name" required style="width: 100%; margin-top: 8px; padding: 13px; font-size: 16px; font-family: inherit; border: 1px solid var(--line); border-radius: 2px; background: var(--bg); color: var(--ink);" />
+                <input type="text" name="last_name" required style="width: 100%; margin-top: 8px; padding: 13px; font-size: 16px; font-family: inherit; border: 1px solid var(--line); border-radius: 2px; background: var(--surface); color: var(--ink);" />
               </label>
             </div>
             <label style="display: block; margin-top: 16px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);">Email
-              <input type="email" name="email" required style="width: 100%; margin-top: 8px; padding: 13px; font-size: 16px; font-family: inherit; border: 1px solid var(--line); border-radius: 2px; background: var(--bg); color: var(--ink);" />
+              <input type="email" name="email" required style="width: 100%; margin-top: 8px; padding: 13px; font-size: 16px; font-family: inherit; border: 1px solid var(--line); border-radius: 2px; background: var(--surface); color: var(--ink);" />
             </label>
             <label style="display: block; margin-top: 16px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);">Message
-              <textarea name="message" rows="5" required style="width: 100%; margin-top: 8px; padding: 13px; font-size: 16px; font-family: inherit; border: 1px solid var(--line); border-radius: 2px; background: var(--bg); color: var(--ink); resize: vertical;"></textarea>
+              <textarea name="message" rows="5" required style="width: 100%; margin-top: 8px; padding: 13px; font-size: 16px; font-family: inherit; border: 1px solid var(--line); border-radius: 2px; background: var(--surface); color: var(--ink); resize: vertical;"></textarea>
             </label>
             <button type="submit" style="margin-top: 18px; padding: 14px 26px; font-size: 15px; font-weight: 600; font-family: inherit; background: var(--accent); color: var(--accent-ink); border: none; border-radius: 2px; cursor: pointer;">Send message</button>
           </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- Latest Updates (LinkedIn). To show your company feed, keep the widget below.
-         Find your company ID at linkedin.com/company/YOUR_COMPANY_ID/ -->
-    <section id="updates" style="border-top: 1px solid var(--line); padding: clamp(56px, 8vw, 116px) clamp(20px, 5vw, 72px);">
-      <div style="max-width: 1240px; margin: 0 auto;">
-        <div data-reveal style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);">09 / Latest updates</div>
-        <h2 data-reveal style="margin: 18px 0 28px; max-width: 14em; font-size: clamp(28px, 3.6vw, 50px); line-height: 1.08; letter-spacing: -0.025em; font-weight: 800;">Follow our journey.</h2>
-        <div data-reveal style="max-width: 800px;">
-          <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-          <script type="IN/CompanyProfile" data-id="applied-environmental-intelligence" data-format="inline" data-related="false"></script>
         </div>
       </div>
     </section>

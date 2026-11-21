@@ -70,6 +70,20 @@
       a.navlink:focus-visible {
         color: var(--ink);
       }
+      a.nav-signin {
+        padding: 8px 15px;
+        border: 1px solid var(--muted);
+        border-radius: 2px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--ink);
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      a.nav-signin:hover,
+      a.nav-signin:focus-visible {
+        border-color: var(--ink);
+      }
       a.footlink {
         color: var(--muted);
         text-decoration: underline;
@@ -168,7 +182,15 @@
         }
       }
 
-      @media (max-width: 1120px) {
+      /* Keep the nav on one row once the sign-in button is added:
+         drop the two secondary links a little earlier than the phone layout. */
+      @media (max-width: 920px) {
+        .nav-hide-sm {
+          display: none;
+        }
+      }
+
+      @media (max-width: 1260px) {
         .brand-sub {
           display: none;
         }
@@ -198,6 +220,11 @@
         .nav-cta {
           padding: 8px 12px !important;
           font-size: 13px !important;
+        }
+
+        a.nav-signin {
+          padding: 7px 11px;
+          font-size: 13px;
         }
 
         .hero-video {
@@ -232,6 +259,7 @@
         <a class="navlink nav-hide-sm" href="#difference">Difference</a>
         <a class="navlink" href="#team">Team</a>
         <a class="nav-cta" href="#contact" style="background: var(--accent); color: var(--accent-ink); padding: 9px 16px; border-radius: 2px; font-size: 14px; font-weight: 600; text-decoration: none;">Request a demo</a>
+        <a class="nav-signin" href="https://sonic-dashboard-320915341969.us-central1.run.app/" rel="nofollow" title="AEI staff only. Requires an AEI Google account">Staff sign-in</a>
       </nav>
     </header>
 

@@ -70,6 +70,15 @@
       a.navlink:focus-visible {
         color: var(--ink);
       }
+      a.footlink {
+        color: var(--muted);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      a.footlink:hover,
+      a.footlink:focus-visible {
+        color: var(--ink);
+      }
 
       section[id] {
         scroll-margin-top: 0;
@@ -599,7 +608,10 @@
           <span style="font-size: 22px; font-weight: 800; letter-spacing: -0.045em;">AEI</span>
           <span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);">Applied Environmental Intelligence</span>
         </div>
-        <div style="font-size: 11px; letter-spacing: 0.08em; color: var(--muted);">© 2026 AEI · Seattle, WA</div>
+        <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 22px; font-size: 11px; letter-spacing: 0.08em; color: var(--muted);">
+          <a class="footlink" href="https://sonic-dashboard-320915341969.us-central1.run.app/" rel="nofollow" title="Requires an AEI Google account">AEI intranet (staff sign-in)</a>
+          <span>© 2026 AEI · Seattle, WA</span>
+        </div>
       </div>
     </footer>
 
